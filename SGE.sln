@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Aplicacion", "SGE.Aplicacion\SGE.Aplicacion.csproj", "{F26EED09-30ED-4A3D-AE09-1618C9954207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Repositorios", "SGE.Repositorios\SGE.Repositorios.csproj", "{A4C9AA36-73A9-4ABC-92C8-8FF9B2F49686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.UI", "SGE.UI\SGE.UI.csproj", "{C20E12CD-DFA7-4516-B823-A7A0367DA924}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F26EED09-30ED-4A3D-AE09-1618C9954207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26EED09-30ED-4A3D-AE09-1618C9954207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26EED09-30ED-4A3D-AE09-1618C9954207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26EED09-30ED-4A3D-AE09-1618C9954207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C9AA36-73A9-4ABC-92C8-8FF9B2F49686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C9AA36-73A9-4ABC-92C8-8FF9B2F49686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C9AA36-73A9-4ABC-92C8-8FF9B2F49686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C9AA36-73A9-4ABC-92C8-8FF9B2F49686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C20E12CD-DFA7-4516-B823-A7A0367DA924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C20E12CD-DFA7-4516-B823-A7A0367DA924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C20E12CD-DFA7-4516-B823-A7A0367DA924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C20E12CD-DFA7-4516-B823-A7A0367DA924}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

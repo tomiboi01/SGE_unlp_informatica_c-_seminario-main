@@ -1,0 +1,41 @@
+@page "/register"
+@using SGE.Aplicacion
+@using SGE.Aplicacion.Servicios
+@inject NavigationManager Navigation
+@using SGE.Repositorios
+@namespace SGE.Aplicacion.CasosDeUso
+@rendermode InteractiveServer
+@inject CasoDeUsoUsuarioAlta casoDeUsoUsuarioAlta
+<PageTitle>Registrarse</PageTitle>
+<h3>Registrarse</h3>
+
+<EditForm Model="@user">
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <InputText id="nombre" @bind-Value="user.Nombre" class="form-control" />
+        <label for="apellido">Apellido:</label>
+        <InputText id="apellido" @bind-Value="user.Apellido" class="form-control" />
+        <label for="correoelectronico">Correo electrónico:</label>
+        <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control" />
+        <label for="contraseña">Contraseña:</label>
+        <InputText id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
+    </div>
+    <button type="submit" @onclick="Agregar" class="btn btn-primary">Registrar</button>
+</EditForm>
+@if (Loggeado)
+{
+    <div class="alert alert-danger" role="alert">
+        Usuario no valido
+    </div>
+}
+@code
+{
+    bool Loggeado = false;
+    private Usuario user = new();
+
+    private void Agregar()
+    {
+        casoDeUsoUsuarioAlta.Ejecutar(user);
+        Navigation.NavigateTo("/");
+    }
+}
