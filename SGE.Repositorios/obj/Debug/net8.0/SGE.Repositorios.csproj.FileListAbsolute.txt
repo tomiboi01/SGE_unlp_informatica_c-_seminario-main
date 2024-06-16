@@ -13,3 +13,4 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Re
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.sourcelink.json

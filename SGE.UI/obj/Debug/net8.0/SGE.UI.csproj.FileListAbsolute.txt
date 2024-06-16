@@ -62,3 +62,5 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.pdb
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.genruntimeconfig.cache
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\ref\SGE.UI.dll
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.sourcelink.json
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Pages\Register.razor.rz.scp.css

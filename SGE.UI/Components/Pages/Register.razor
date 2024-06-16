@@ -6,11 +6,12 @@
 @namespace SGE.Aplicacion.CasosDeUso
 @rendermode InteractiveServer
 @inject CasoDeUsoUsuarioAlta casoDeUsoUsuarioAlta
+@inject ManejarLogin manejarLogin
 <PageTitle>Registrarse</PageTitle>
 <h3>Registrarse</h3>
 
 <EditForm Model="@user">
-    <div class="form-group">
+    <div class="form-group margin">
         <label for="nombre">Nombre:</label>
         <InputText id="nombre" @bind-Value="user.Nombre" class="form-control" />
         <label for="apellido">Apellido:</label>
@@ -18,16 +19,11 @@
         <label for="correoelectronico">Correo electrónico:</label>
         <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control" />
         <label for="contraseña">Contraseña:</label>
-        <InputText id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
+        <InputText type="password" id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
     </div>
-    <button type="submit" @onclick="Agregar" class="btn btn-primary">Registrar</button>
+    <button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
 </EditForm>
-@if (Loggeado)
-{
-    <div class="alert alert-danger" role="alert">
-        Usuario no valido
-    </div>
-}
+
 @code
 {
     bool Loggeado = false;
@@ -35,7 +31,18 @@
 
     private void Agregar()
     {
-        casoDeUsoUsuarioAlta.Ejecutar(user);
-        Navigation.NavigateTo("/");
+
+        try 
+        {
+            manejarLogin.Loggear(user.CorreoElectronico, user.Contraseña);
+            Loggeado = false;
+        }
+        catch
+        { 
+            casoDeUsoUsuarioAlta.Ejecutar(1,user);  
+            Navigation.NavigateTo("/");
+        }
+        user = new();
+        
     }
 }

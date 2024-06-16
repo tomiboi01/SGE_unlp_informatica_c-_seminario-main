@@ -1,6 +1,7 @@
 using SGE.Repositorios;
 using SGE.Aplicacion;
 using SGE.UI.Components;
+using SGE.Aplicacion.Servicios;
 var builder = WebApplication.CreateBuilder(args);
 // acceder a la base de datos desde los servicios
 // consultar devolver enumerable o lista en los repositorios
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
                 .AddTransient<CasoDeUsoObtenerUsuario>()
                 .AddTransient<IEspecificacionCambioDeEstado, EspecificacionCambioDeEstado>()
                 .AddTransient<IServicioAutorizacion, ServicioAutorizacion>()
+                .AddTransient<ManejarLogin>();
 
 
 ;

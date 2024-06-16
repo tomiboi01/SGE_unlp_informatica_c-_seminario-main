@@ -9,3 +9,4 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Ap
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.sourcelink.json

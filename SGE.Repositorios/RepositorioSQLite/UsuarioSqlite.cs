@@ -36,9 +36,9 @@ public class UsuarioSqlite : IUsuarioRepositorio
         }
         throw new RepositorioException("Usuario no encontrado");
     }
-    public Usuario ObtenerUsuario(string nombre, string contraseña)
+    public Usuario ObtenerUsuario(string correo, string contraseña)
     {
-        var user = _context.Usuarios.Where(x => x.Nombre == nombre && x.Contraseña == Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(contraseña)))).FirstOrDefault();
+        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(contraseña)))).FirstOrDefault();
         if (user != null)
         {
             return user;
