@@ -1,23 +1,121 @@
-﻿@page "/"
-@page "/{Id:int?}"
-@using System.Security.Cryptography
+﻿@page "/{Id:int?}"
+
 @using SGE.Aplicacion
 @using SGE.Aplicacion.Servicios
 @inject NavigationManager Navigation
 @using SGE.Repositorios
 @rendermode InteractiveServer
 @inject ManejarLogin manejarLogin
+@inject CasoDeUsoObtenerUsuario casoDeUsoObtenerUsuario
+@inject IUsuarioRepositorio usuarioRepositorio
 @using System.Text
+@using SGE.Aplicacion.CasosDeUso;
+@inject CasoDeUsoExpedienteConsultaTodos casoDeUsoExpedienteConsultaTodos
 <PageTitle>Home</PageTitle>
+@if( Id==null ){
 
-@if (Id == 23){
-    <h1>Hello, world!</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bienvenido, por favor inicie sesion</h1>
+            </div>
+        </div>   
+    </div> 
+}
+else{
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <Menu />
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Bienvenido,@user.CorreoElectronico </h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Expedientes</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary">Crear Expediente</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Caratula</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">FechaCreacion</th>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="col">Contenido tramite</th>
+                                                    <th scope="col">FechaCreacion tramite</th>
+                                                </tr>                                                       
+                                            </thead>
+                                            <tbody>
+                                               @foreach (Expediente expediente in expedientes)
+                                                    {       
+                                                    <tr>
+                                                        <td>@expediente.Caratula</td>
+                                                        <td>@expediente.Estado</td> 
+                                                        <td>@expediente.FechaCreacion</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <button class="btn btn-primary">Tramites</button>
+                                                        @foreach  (Tramite tramite in expediente.Tramites)
+                                                        {
+                                                            
+                                                                <td>@tramite.Contenido</td>
+                                                                <td>@tramite.ExpedienteId</td>
+                                                                <td>@tramite.FechaCreacion</td>
+                                                          
+                                                        }
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
-Welcome to your new app.
 @code {
-    [Parameter]
-    public int? Id { get; set; }
+    Expediente expediente = new Expediente();
     Usuario user = new Usuario();
+    public List<Expediente> expedientes;
+    [Parameter]
+    public int? Id { get; set; }  
+    private void Loggear(){
+        Navigation.NavigateTo("/login");
+    }
+    private void Register(){
+        Navigation.NavigateTo("/register");
+    }
+    protected override void OnInitialized(){
+            if (Id != null)
+            {
+                user = casoDeUsoObtenerUsuario.Ejecutar(Id.Value);
+                expedientes = casoDeUsoExpedienteConsultaTodos.Ejecutar();
+                Console.WriteLine(expedientes);
+            }
     
+
+    }
 }

@@ -7,21 +7,23 @@
 @rendermode InteractiveServer
 @inject ManejarLogin manejarLogin
 @using System.Text
-
+<PageTitle>Iniciar sesión</PageTitle>
+<h3>Iniciar sesión</h3>
  <EditForm Model="@user">
     <div class="form-group">
         <label for="correoelectronico">Correo electrónico:</label>
         <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control" />
         <label for="contraseña">Contraseña:</label>
-        <InputText id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
+        <InputText type="password" id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
     </div>
-    <button type="submit" @onclick="Entrar" class="btn btn-primary">Registrar</button>
+    <button type="submit" @onclick="Entrar" class="btn btn-primary">Login</button>
 </EditForm>
 @if (Loggeado)
 {
-    <div class="alert alert-danger" role="alert">
-        Usuario no valido
-    </div>
+        <div class="alert alert-danger" role="alert">
+            <strong class=>Usuario no valido!</strong>
+            <button type="button" class="close" @onclick="Cerrar">x</button>
+        </div>
 }
 
 
@@ -30,23 +32,20 @@
     bool Loggeado = false;
     private Usuario user = new();
 
+    
+
     private void Entrar()
     {
         try{
             user = manejarLogin.Loggear(user.CorreoElectronico, user.Contraseña);
-            int id = int.Parse(Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(user.Id.ToString()))));
-            if(user is not null)
-            Navigation.NavigateTo($"/{id}");
+            if(user != null)
+                Navigation.NavigateTo($"/{user.Id}");
         }
         catch{
             Loggeado = true;
             user = new();
         }
-        user = new();
     }
 
-    protected override void OnInitialized()
-    {
-    }
-    
-} 
+    private void Cerrar() => Loggeado = false;
+}

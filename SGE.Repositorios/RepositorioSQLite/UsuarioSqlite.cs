@@ -17,7 +17,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public void Baja(int Id)
     {
-        var user = _context.Usuarios.Where(x => x.Id == Id).FirstOrDefault();
+        var user = _context.Usuarios.Find(Id);
         if (user != null)
         {
             _context.Usuarios.Remove(user);
@@ -27,7 +27,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public void ModificarUsuario(Usuario usuario)
     {
-        var user = _context.Usuarios.Where(x => x.Id == usuario.Id).FirstOrDefault();
+        var user = _context.Usuarios.Find(usuario.Id);
         if (user != null)
         {
             user.Nombre = usuario.Nombre;
@@ -38,7 +38,8 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public Usuario ObtenerUsuario(string correo, string contraseña)
     {
-        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(contraseña)))).FirstOrDefault();
+        contraseña = Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(contraseña)));
+        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == contraseña).SingleOrDefault();
         if (user != null)
         {
             return user;
@@ -47,7 +48,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public Usuario ObtenerUsuario(int Id)
     {
-        var user = _context.Usuarios.Where(x => x.Id == Id).FirstOrDefault();
+        var user = _context.Usuarios.Find(Id);
         if (user != null)
         {
             return user;
@@ -61,7 +62,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public void OtorgarPermiso(Usuario usuario, Permiso permiso)
     {
-        var user = _context.Usuarios.Where(x => x.Id == usuario.Id).FirstOrDefault();
+        var user = _context.Usuarios.Find(usuario.Id);
         if (user != null)
         {
             user.Permisos[(int)permiso] = true;

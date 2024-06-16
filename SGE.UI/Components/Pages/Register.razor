@@ -24,10 +24,32 @@
     <button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
 </EditForm>
 
+@if (YaRegistrado)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong class=>Usuario no valido!</strong>
+        <button type="button" class="close alineadoDer" @onclick="CerrarReg">x</button>
+    </div>
+}
+else
+if (NoValido)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong class=>Usuario no valido!</strong>
+        <button type="button" class="close alineadoDer" @onclick="CerrarVal">x</button>
+    </div>
+}
+
+
 @code
 {
-    bool Loggeado = false;
+    bool YaRegistrado = false;
+    bool NoValido = false;
     private Usuario user = new();
+
+    private void CerrarReg() => YaRegistrado = false;
+
+    private void CerrarVal() => NoValido = false;
 
     private void Agregar()
     {
@@ -35,12 +57,19 @@
         try 
         {
             manejarLogin.Loggear(user.CorreoElectronico, user.Contraseña);
-            Loggeado = false;
+            YaRegistrado = true;
         }
         catch
         { 
-            casoDeUsoUsuarioAlta.Ejecutar(1,user);  
-            Navigation.NavigateTo("/");
+            try
+            {
+                casoDeUsoUsuarioAlta.Ejecutar(1,user);
+                Navigation.NavigateTo("/{user.Id}");
+            }  
+            catch
+            {
+                NoValido = true;
+            }
         }
         user = new();
         

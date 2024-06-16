@@ -64,8 +64,9 @@ public class ExpedienteSqlite : IExpedienteRepositorio
 
     public List<Expediente> ListarTodos()
     {
+        
         using var _context = new SGEContext();
-        return _context.Expedientes.ToList();
+       return _context.Expedientes.ToList();
     }
 
     public void Modificacion(int idUsuario, Expediente expediente)
