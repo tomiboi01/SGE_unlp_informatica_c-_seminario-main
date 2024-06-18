@@ -1,0 +1,142 @@
+@page "/a/{Id:int?}"
+
+@using SGE.Aplicacion
+@using SGE.Aplicacion.Servicios
+@inject NavigationManager Navigation
+@using SGE.Repositorios
+@rendermode InteractiveServer
+@inject ManejarLogin manejarLogin
+@inject CasoDeUsoUsuarioObtenerPorId casoDeUsoObtenerUsuario
+@using SGE.Aplicacion.CasosDeUso;
+@inject CasoDeUsoExpedienteConsultaTodos casoDeUsoExpedienteConsultaTodos
+@inject IServicioAutorizacion ServicioAutorizacion
+<PageTitle>Home</PageTitle>
+@if( Id==null ){
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bienvenido, por favor inicie sesion</h1>
+            </div>
+        </div>   
+    </div> 
+}
+else{
+
+    <ol>
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th>Caratula</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th>Usuario de última modificación</th>
+            </tr>
+        </thead>
+    </table>
+    @foreach (Expediente expediente in expedientes)
+    {   
+        <table class="table"> 
+            <tr>
+            <td>@expediente.Caratula </td>
+            <td>@expediente.Estado </td>
+            <td>@expediente.FechaCreacion</td>
+            <td>@expediente.UsuarioUltModificacion </td>
+            </tr>
+        </table>
+
+        @if(ServicioAutorizacion.PoseeElPermiso(user.Id,Permiso.ExpedienteBaja)){
+            <td> <button class="btn btn-danger" type="submit" @onclick="() => Eliminar(expediente.Id)">Eliminar </button> </td>
+            }
+        else 
+        {
+            <td>  
+                <div class="alert alert-danger" role="alert">
+                    <strong>No posee permiso para eliminar expedientes</strong> 
+                </div> 
+            </td>
+        }
+        @if (ServicioAutorizacion.PoseeElPermiso(user.Id,Permiso.ExpedienteModificacion)){
+        <td> <button class="btn btn-primary" > Modificar </button> </td>
+        }
+        else
+        {
+            <td>  
+                <div class="alert alert-danger" role="alert">
+                    <strong>No posee permiso para modificar expedientes</strong> 
+                </div> 
+            </td>
+        }
+            
+        <td> <button class="btn btn-primary"  @onclick="() => mostrar[expedientes.IndexOf(expediente)] = !mostrar[expedientes.IndexOf(expediente)]"> Listar tramites </button> </td>
+
+        @if(mostrar[expedientes.IndexOf(expediente)]){
+            if (expediente.Tramites == null)
+            {
+                <div class="container">
+                    <strong>El expediente no posee tramites</strong> 
+                </div> 
+            }
+            else
+            {
+                <ol>
+                @foreach  (Tramite tramite in expediente.Tramites)
+                {
+                    
+                        <li>@tramite.Contenido</li>
+                        <li>@tramite.ExpedienteId</li>
+                        <li>@tramite.FechaCreacion</li>
+                    
+                } 
+                </ol>
+            }
+        }
+            
+        
+   
+    }
+    </ol>
+}
+
+@code {
+    Expediente expediente = new Expediente();
+    Usuario user = new Usuario();
+    #nullable disable
+    public List<Expediente> expedientes;
+    
+    bool[] mostrar;
+    #nullable enable
+    [Parameter]
+    public int? Id { get; set; }  
+    private void Loggear(){
+        Navigation.NavigateTo("/login");
+    }
+    private void Register(){
+        Navigation.NavigateTo("/register");
+    }
+    private void Eliminar(int idexp){
+        Navigation.NavigateTo($"/expediente/eliminar/{Id}/{idexp}");
+    }
+
+    
+    protected override void OnInitialized(){
+            if (Id != null)
+            {
+                user = casoDeUsoObtenerUsuario.Ejecutar(Id.Value);
+                expedientes = casoDeUsoExpedienteConsultaTodos.Ejecutar();
+                mostrar = new bool[expedientes.Count()];
+            }
+    
+
+    }
+}
+
+<style>
+    .table{
+        margin-bottom =100px;
+    }
+    td, th{
+        text-align: center;
+    }
+
+</style>

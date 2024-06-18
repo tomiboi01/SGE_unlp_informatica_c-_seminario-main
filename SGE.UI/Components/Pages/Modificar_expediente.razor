@@ -1,0 +1,27 @@
+@page "/expediente/modificar/{Id:int?}/{IdExp:int?}"
+@inject NavigationManager Navigation
+@using SGE.Aplicacion
+@inject CasoDeUsoExpedienteModificacion casoDeUsoExpedienteModificar
+@* 
+<h> Modificando expediente número @IdExp</h>
+
+<label> Etiqueta:</label>
+<input @bind-value = ""> Caratula: </input>
+ *@
+
+@code
+{
+    [Parameter]
+    public int? IdExp { get; set; }
+    [Parameter]
+    public int? Id { get; set; }
+
+    Expediente exp;
+    protected override void OnInitialized()
+    {
+      //exp = casoDeUsoExpedienteModificar.Ejecutar(Id.Value, IdExp.Value); 
+
+    }
+
+
+}

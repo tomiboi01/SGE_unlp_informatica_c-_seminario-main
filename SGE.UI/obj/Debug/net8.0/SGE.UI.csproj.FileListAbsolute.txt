@@ -1,3 +1,10 @@
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.AssemblyReference.cache
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.AssemblyInfoInputs.cache
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.AssemblyInfo.cs
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.CoreCompileInputs.cache
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.sourcelink.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\appsettings.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\SGE.UI.staticwebassets.runtime.json
@@ -39,12 +46,6 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\SGE.Repositorios.dll
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\SGE.Aplicacion.pdb
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\bin\Debug\net8.0\SGE.Repositorios.pdb
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.AssemblyReference.cache
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.AssemblyInfoInputs.cache
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.AssemblyInfo.cs
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.CoreCompileInputs.cache
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\staticwebassets\msbuild.SGE.UI.Microsoft.AspNetCore.StaticWebAssets.props
@@ -54,6 +55,7 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
+C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Pages\Register.razor.rz.scp.css
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\bundle\SGE.UI.styles.css
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\projectbundle\SGE.UI.bundle.scp.css
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.Up2Date
@@ -62,5 +64,3 @@ C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.pdb
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.genruntimeconfig.cache
 C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\ref\SGE.UI.dll
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.sourcelink.json
-C:\Users\tomic\OneDrive\Escritorio\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Pages\Register.razor.rz.scp.css

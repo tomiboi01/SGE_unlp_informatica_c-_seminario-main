@@ -2,7 +2,7 @@
 
 namespace SGE.Aplicacion;
 
-public class CasoDeUsoUsuarioBaja(IUsuarioRepositorio usuarioRepositorio)
+public class CasoDeUsoUsuarioBaja(IUsuarioRepositorio usuarioRepositorio) : AbstractCasoDeUsoUsuario(usuarioRepositorio)
 {
     public void Ejecutar(int idUsuario)
     {
@@ -10,7 +10,7 @@ public class CasoDeUsoUsuarioBaja(IUsuarioRepositorio usuarioRepositorio)
         {
             throw new AutorizacionExcepcion("Solo el administrador puede dar de baja a un usuario");
         }
-        usuarioRepositorio.Baja(idUsuario);
+        RepositorioUsu.Baja(idUsuario);
 
     }
 

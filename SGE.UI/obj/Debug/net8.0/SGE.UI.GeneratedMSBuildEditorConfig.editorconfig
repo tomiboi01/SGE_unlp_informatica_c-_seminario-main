@@ -22,12 +22,8 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/CuadroDialogo.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDdWFkcm9EaWFsb2dvLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/ListadoExpedientes.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMaXN0YWRvRXhwZWRpZW50ZXMucmF6b3I=
+[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Eliminar_expediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbGltaW5hcl9leHBlZGllbnRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Error.razor]
@@ -40,6 +36,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Modificar_expediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJfZXhwZWRpZW50ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Sadf.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWRmLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Weather.razor]

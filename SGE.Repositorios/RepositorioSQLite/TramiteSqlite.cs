@@ -30,12 +30,14 @@ public class TramiteSqlite : ITramiteRepositorio
     public void BorrarTodosDeIdExpediente(int idExpediente)
     {
 
-        var tramitesBorrar = context.Tramites.Where(t => t.ExpedienteId == idExpediente).ToList();
-        if (tramitesBorrar != null)
-        {
-            context.RemoveRange(tramitesBorrar);
-        }
-        context.SaveChanges();
+        // var tramitesBorrar = context.Tramites.Where(t => t.ExpedienteId == idExpediente).ToList();
+        // if (tramitesBorrar != null)
+        // {
+        //     context.RemoveRange(tramitesBorrar);
+        // }
+        // context.SaveChanges();
+        
+        //No hace falta implementarlo ya que SQlite ya lo hace por nosotros
     }
 
     public Tramite BuscarPorId(int idTramite)
@@ -53,7 +55,7 @@ public class TramiteSqlite : ITramiteRepositorio
 
     public Tramite? BuscarUltimo(int idExpediente)
     {
-        return context.Tramites.Where(t => t.ExpedienteId == idExpediente).LastOrDefault();
+        return context.Tramites.Where(t => t.ExpedienteId == idExpediente).OrderBy(t => t.Id).LastOrDefault();
     }
 
     public List<Tramite> ListarPorEtiqueta(EtiquetaTramite etiqueta)

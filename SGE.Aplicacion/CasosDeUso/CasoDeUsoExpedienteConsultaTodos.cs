@@ -1,11 +1,11 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteConsultaTodos(IExpedienteRepositorio expedienteRepositorio)
+public class CasoDeUsoExpedienteConsultaTodos(IExpedienteRepositorio expedienteRepositorio) : AbstractCasoDeUsoExpediente(expedienteRepositorio)
 {
     public List<Expediente> Ejecutar()
     {
 
-        List<Expediente> lista = expedienteRepositorio.ListarTodos();
+        List<Expediente> lista = RepositorioExp.ListarTodos();
         return lista;
     }
 

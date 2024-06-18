@@ -6,11 +6,10 @@
 @using SGE.Repositorios
 @rendermode InteractiveServer
 @inject ManejarLogin manejarLogin
-@inject CasoDeUsoObtenerUsuario casoDeUsoObtenerUsuario
-@inject IUsuarioRepositorio usuarioRepositorio
-@using System.Text
+@inject CasoDeUsoUsuarioObtenerPorId casoDeUsoObtenerUsuario
 @using SGE.Aplicacion.CasosDeUso;
 @inject CasoDeUsoExpedienteConsultaTodos casoDeUsoExpedienteConsultaTodos
+@inject IServicioAutorizacion ServicioAutorizacion
 <PageTitle>Home</PageTitle>
 @if( Id==null ){
 
@@ -25,54 +24,75 @@
 else{
 
 
-
-    <div class="container">
+<div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <Menu />
-            </div>
-            <div class="col-md-9">
+            <div >
                 <div class="row">
-                    <div class="col-md-12">
-                        <h1>Bienvenido,@user.CorreoElectronico </h1>
+                    <div >
+                        <h1>Bienvenido @user.Nombre @user.Apellido </h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div >
                         <div class="card">
                             <div class="card-header">
                                 <h3>Expedientes</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div >
                                         <button class="btn btn-primary">Crear Expediente</button>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div >
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Caratula</th>
-                                                    <th scope="col">Estado</th>
-                                                    <th scope="col">FechaCreacion</th>
+                                                    <th>Caratula</th>
+                                                    <th>Estado</th>
+                                                    <th>Fecha de creacion</th>
+                                                    <th>Usuario de última modificación</th>
                                                 </tr>
-                                                <tr>
-                                                    <th scope="col">Contenido tramite</th>
-                                                    <th scope="col">FechaCreacion tramite</th>
-                                                </tr>                                                       
+                                                                                       
                                             </thead>
                                             <tbody>
                                                @foreach (Expediente expediente in expedientes)
-                                                    {       
+                                                    {   
+                                            
                                                     <tr>
                                                         <td>@expediente.Caratula</td>
                                                         <td>@expediente.Estado</td> 
                                                         <td>@expediente.FechaCreacion</td>
+                                                        <td class="td">@expediente.UsuarioUltModificacion</td>
+                                                        @if(ServicioAutorizacion.PoseeElPermiso(user.Id,Permiso.ExpedienteBaja)){
+                                                            <td> <button class="btn btn-danger" type="submit" @onclick="() => Eliminar(expediente.Id)">Eliminar </button> </td>
+                                                           }
+                                                        else 
+                                                        {
+                                                            <td>  
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <strong>No posee permiso para eliminar expedientes</strong> 
+                                                                </div> 
+                                                            </td>
+                                                        }
+                                                        @if (ServicioAutorizacion.PoseeElPermiso(user.Id,Permiso.ExpedienteModificacion)){
+                                                        <td> <button class="btn btn-primary" > Modificar </button> </td>
+                                                        }
+                                                        else
+                                                        {
+                                                             <td>  
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <strong>No posee permiso para modificar expedientes</strong> 
+                                                                </div> 
+                                                            </td>
+                                                        }
+                                                         
+                                                        <td> <button class="btn btn-primary"  @onclick="() => mostrar[expedientes.IndexOf(expediente)] = true"> Listar tramites </button> </td>
+                                                    
                                                     </tr>
                                                     <tr>
-                                                        <button class="btn btn-primary">Tramites</button>
+                                                        @if(mostrar[expedientes.IndexOf(expediente)] && expediente?.Tramites != null){
                                                         @foreach  (Tramite tramite in expediente.Tramites)
                                                         {
                                                             
@@ -80,7 +100,10 @@ else{
                                                                 <td>@tramite.ExpedienteId</td>
                                                                 <td>@tramite.FechaCreacion</td>
                                                           
+                                                        } 
                                                         }
+                                                            
+                                                        
                                                     </tr>
                                                 }
                                             </tbody>
@@ -99,7 +122,11 @@ else{
 @code {
     Expediente expediente = new Expediente();
     Usuario user = new Usuario();
+    #nullable disable
     public List<Expediente> expedientes;
+    
+    bool[] mostrar;
+    #nullable enable
     [Parameter]
     public int? Id { get; set; }  
     private void Loggear(){
@@ -108,14 +135,26 @@ else{
     private void Register(){
         Navigation.NavigateTo("/register");
     }
+    private void Eliminar(int idexp){
+        Navigation.NavigateTo($"/expediente/eliminar/{Id}/{idexp}");
+    }
+
+    
     protected override void OnInitialized(){
             if (Id != null)
             {
                 user = casoDeUsoObtenerUsuario.Ejecutar(Id.Value);
                 expedientes = casoDeUsoExpedienteConsultaTodos.Ejecutar();
-                Console.WriteLine(expedientes);
+                mostrar = new bool[expedientes.Count()];
             }
     
 
     }
 }
+
+<style>
+    td, th{
+        text-align: center;
+    }
+
+</style>

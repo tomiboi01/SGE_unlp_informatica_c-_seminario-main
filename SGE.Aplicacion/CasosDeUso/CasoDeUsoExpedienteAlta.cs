@@ -2,12 +2,12 @@
 
 namespace SGE.Aplicacion
 {
-    public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repositorio, IServicioAutorizacion servicioAutorizacionProvisorio) : AbstractCasoDeUsoExpediente(repositorio)
+    public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repositorio, IServicioAutorizacion servicioAutorizacion) : AbstractCasoDeUsoExpediente(repositorio)
     {
+        private IServicioAutorizacion ServicioDeAutorizacion {get;} = servicioAutorizacion;
         public void Ejecutar(int idUsuario, Expediente expediente)
-
         {
-            if (!servicioAutorizacionProvisorio.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
+            if (!ServicioDeAutorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
             {
                 throw new AutorizacionExcepcion("No posee el permiso");
             }
@@ -19,8 +19,7 @@ namespace SGE.Aplicacion
             expediente.FechaUltModificacion = DateTime.Now;
             expediente.UsuarioUltModificacion = idUsuario;
             expediente.Estado = EstadoExpediente.RecienIniciado;
-            Repositorio.Alta(expediente);
-
+            RepositorioExp.Alta(expediente);
         }
     }
 }

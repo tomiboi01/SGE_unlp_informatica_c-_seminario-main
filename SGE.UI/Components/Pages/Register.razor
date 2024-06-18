@@ -11,15 +11,15 @@
 <h3>Registrarse</h3>
 
 <EditForm Model="@user">
-    <div class="form-group margin">
+    <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <InputText id="nombre" @bind-Value="user.Nombre" class="form-control" />
+        <InputText id="nombre" @bind-Value="user.Nombre" class="form-control margin" />
         <label for="apellido">Apellido:</label>
-        <InputText id="apellido" @bind-Value="user.Apellido" class="form-control" />
+        <InputText id="apellido" @bind-Value="user.Apellido" class="form-control margin" />
         <label for="correoelectronico">Correo electrónico:</label>
-        <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control" />
+        <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control margin" />
         <label for="contraseña">Contraseña:</label>
-        <InputText type="password" id="contraseña" @bind-Value="user.Contraseña" class="form-control" />
+        <InputText type="password" id="contraseña" @bind-Value="user.Contraseña" class="form-control margin" />
     </div>
     <button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
 </EditForm>
@@ -27,7 +27,7 @@
 @if (YaRegistrado)
 {
     <div class="alert alert-danger" role="alert">
-        <strong class=>Usuario no valido!</strong>
+        <strong>Ya hay un usuario con ese correo y contraseña</strong>
         <button type="button" class="close alineadoDer" @onclick="CerrarReg">x</button>
     </div>
 }
@@ -35,7 +35,7 @@ else
 if (NoValido)
 {
     <div class="alert alert-danger" role="alert">
-        <strong class=>Usuario no valido!</strong>
+        <strong>Usuario no valido!</strong>
         <button type="button" class="close alineadoDer" @onclick="CerrarVal">x</button>
     </div>
 }
@@ -66,7 +66,7 @@ if (NoValido)
                 casoDeUsoUsuarioAlta.Ejecutar(1,user);
                 Navigation.NavigateTo("/{user.Id}");
             }  
-            catch
+            catch 
             {
                 NoValido = true;
             }
@@ -75,3 +75,13 @@ if (NoValido)
         
     }
 }
+
+<style>
+   .margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+    .alineadoDer {
+    align-content: ;
+    }
+</style>

@@ -1,11 +1,11 @@
 namespace SGE.Aplicacion
 {
 
-    public class CasoDeUsoObtenerUsuarioPorCorreoYContra ( IUsuarioRepositorio usuarioRepositorio ) 
+    public class CasoDeUsoUsuarioObtenerPorCorreoYContra ( IUsuarioRepositorio usuarioRepositorio ) : AbstractCasoDeUsoUsuario ( usuarioRepositorio )
     {
         public Usuario Ejecutar ( string correo, string contrasena )
         {
-            return usuarioRepositorio.ObtenerUsuario ( correo, contrasena );
+            return RepositorioUsu.ObtenerUsuario ( correo, contrasena );
         }
     }
 

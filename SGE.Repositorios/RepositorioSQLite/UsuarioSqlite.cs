@@ -23,7 +23,8 @@ public class UsuarioSqlite : IUsuarioRepositorio
             _context.Usuarios.Remove(user);
             _context.SaveChanges();
         }
-        throw new RepositorioException("Usuario no encontrado");
+        else
+            throw new RepositorioException("Usuario no encontrado");
     }
     public void ModificarUsuario(Usuario usuario)
     {
@@ -32,9 +33,12 @@ public class UsuarioSqlite : IUsuarioRepositorio
         {
             user.Nombre = usuario.Nombre;
             user.Contraseña = Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(usuario.Contraseña)));
+            user.Apellido = usuario.Apellido;
+            user.CorreoElectronico = usuario.CorreoElectronico;
             _context.SaveChanges();
         }
-        throw new RepositorioException("Usuario no encontrado");
+        else
+            throw new RepositorioException("Usuario no encontrado");
     }
     public Usuario ObtenerUsuario(string correo, string contraseña)
     {
@@ -53,8 +57,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
         {
             return user;
         }
-        else
-            throw new RepositorioException("Usuario no encontrado");
+        throw new RepositorioException("Usuario no encontrado");
     }
     public List<Usuario> ObtenerUsuarios()
     {
@@ -68,5 +71,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
             user.Permisos[(int)permiso] = true;
             _context.SaveChanges();
         }
+        else 
+            throw new RepositorioException("Usuario no encontrado");
     }
 }

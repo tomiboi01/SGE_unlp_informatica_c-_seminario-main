@@ -1,5 +1,5 @@
-using SGE.Repositorios;
-using SGE.Aplicacion;
+ using SGE.Repositorios;
+ using SGE.Aplicacion;
 using SGE.UI.Components;
 using SGE.Aplicacion.Servicios;
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +28,7 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
                 .AddTransient<CasoDeUsoTramiteModificacion>()
                 .AddTransient<CasoDeUsoUsuarioAlta>()
                 .AddTransient<CasoDeUsoUsuarioBaja>()
-                .AddTransient<CasoDeUsoObtenerUsuario>()
+                .AddTransient<CasoDeUsoUsuarioObtenerPorId>()
                 .AddTransient<IEspecificacionCambioDeEstado, EspecificacionCambioDeEstado>()
                 .AddTransient<IServicioAutorizacion, ServicioAutorizacion>()
                 .AddTransient<ManejarLogin>();
@@ -53,3 +53,8 @@ SGESqlite.Inicializar();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 app.Run();
+
+
+
+
+

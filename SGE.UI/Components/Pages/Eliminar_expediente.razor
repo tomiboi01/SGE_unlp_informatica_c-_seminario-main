@@ -1,0 +1,40 @@
+@page "/expediente/eliminar/{Id:int?}/{IdExp:int?}"
+
+
+@inject NavigationManager Navigation
+@using SGE.Repositorios
+@using SGE.Aplicacion
+@inject CasoDeUsoExpedienteBaja caso
+
+
+@code
+{
+
+    [Parameter]
+    public int? IdExp { get; set; }
+    [Parameter]
+    public int? Id { get; set; }
+
+
+
+    protected override void OnInitialized()
+    {
+        try{
+            if (Id == null || IdExp == null)
+            {
+                Navigation.NavigateTo("/");
+            }
+            else
+            {
+                caso.Ejecutar(Id.Value, IdExp.Value);
+                Navigation.NavigateTo($"/{Id.Value}");
+            }
+        }
+        catch (Exception e)
+        {
+           Console.WriteLine(e.Message);
+            }
+    }
+
+  
+}

@@ -45,6 +45,7 @@ public class ExpedienteSqlite : IExpedienteRepositorio
     {
         using var _context = new SGEContext();
         Expediente? e = _context.Expedientes.Include(e => e.Tramites).Where(a => a.Id == idExpediente).SingleOrDefault();
+        
         if (e != null)
         {
             return e;
@@ -60,13 +61,13 @@ public class ExpedienteSqlite : IExpedienteRepositorio
         using var _context = new SGEContext();
 
         return _context.Expedientes.Where(e => e.Estado == estado).ToList();
+        
     }
 
     public List<Expediente> ListarTodos()
     {
-        
         using var _context = new SGEContext();
-       return _context.Expedientes.ToList();
+        return _context.Expedientes.Include(e => e.Tramites).ToList();
     }
 
     public void Modificacion(int idUsuario, Expediente expediente)
@@ -76,9 +77,9 @@ public class ExpedienteSqlite : IExpedienteRepositorio
         var expedienteModificar = _context.Expedientes.Where(a => a.Id == expediente.Id).SingleOrDefault();
         if (expedienteModificar != null)
         {
-
+            expedienteModificar.FechaUltModificacion = expediente.FechaUltModificacion;
+            expedienteModificar.UsuarioUltModificacion = idUsuario;
             expedienteModificar.Caratula = expediente.Caratula;
-            expedienteModificar.Estado = expediente.Estado;
             _context.SaveChanges();
         }
         else
