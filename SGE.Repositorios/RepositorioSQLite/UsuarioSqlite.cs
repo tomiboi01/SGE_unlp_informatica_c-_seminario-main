@@ -74,4 +74,6 @@ public class UsuarioSqlite : IUsuarioRepositorio
         else 
             throw new RepositorioException("Usuario no encontrado");
     }
+
+
 }

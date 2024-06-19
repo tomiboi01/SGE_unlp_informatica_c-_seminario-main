@@ -1,0 +1,50 @@
+@page "/usuarios/{Id:int}"
+
+@inject CasoDeUsoUsuarioObtenerTodos casoDeUsoObtenerUsuarios
+@inject NavigationManager Navigation
+@inject IServicioAutorizacion ServicioAutorizacion
+
+@if (Id != 1)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>No posee permisos para ver los usuarios registrados </strong>
+    </div>
+}
+else
+{
+    @foreach( Usuario user in usuarios)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@user.Nombre</h5>
+                <button class="btn btn-primary" @onclick="() =>Modificar(user.Id)"> Modificar</button> 
+            <div class="nav-item px-3">
+            <i class="bi bi-pencil-fill"></i>
+        </div>                <p class="card-text">@user.CorreoElectronico</p>
+            </div>
+        </div>
+    }
+
+}
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    #nullable disable
+    public List<Usuario> usuarios;
+    #nullable enable
+
+    protected override void OnInitialized()
+    {
+        if (Id == 1)
+        {
+            usuarios = casoDeUsoObtenerUsuarios.Ejecutar();
+        }
+
+    }
+
+    private void Modificar (int idUsuario){}
+
+}

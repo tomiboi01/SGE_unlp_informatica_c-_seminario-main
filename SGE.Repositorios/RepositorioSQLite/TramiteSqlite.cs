@@ -68,6 +68,7 @@ public class TramiteSqlite : ITramiteRepositorio
         return context.Tramites.ToList();
     }
 
+
     public List<Tramite> ListarTodosDeIdExpediente(int expedienteId)
     {
         return context.Tramites.Where(t => t.ExpedienteId == expedienteId).ToList();

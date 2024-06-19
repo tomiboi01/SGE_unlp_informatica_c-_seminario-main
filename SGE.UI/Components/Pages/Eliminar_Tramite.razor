@@ -1,0 +1,46 @@
+@page "/tramite/eliminar/{Id:int?}/{idTramite:int?}"
+
+@inject  CasoDeUsoTramiteBaja caso
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@using SGE.Repositorios
+@using SGE.Aplicacion
+
+@code
+{
+
+    [Parameter]
+    public int? idTramite { get; set; }
+    [Parameter]
+    public int? Id { get; set; }
+
+
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+        if (Id == null || idTramite == null)
+        {
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            try
+            {
+                caso.Ejecutar(Id.Value, idTramite.Value);
+                Navigation.NavigateTo($"/{Id}");
+
+            }
+            catch 
+            {
+                
+                Navigation.NavigateTo($"/{Id}");
+
+            }
+        }
+        
+
+  
+}
+}

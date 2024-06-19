@@ -7,4 +7,5 @@ public interface IUsuarioRepositorio
     Usuario ObtenerUsuario(String nombre, String contraseña);
     List<Usuario> ObtenerUsuarios();
     Usuario ObtenerUsuario(int Id);
+
 }

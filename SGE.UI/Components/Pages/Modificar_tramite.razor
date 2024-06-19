@@ -1,0 +1,73 @@
+@page "/tramite/modificar/{Id}/{idTramite}"
+@inject NavigationManager Navigation
+@using SGE.Aplicacion
+@inject CasoDeUsoTramiteModificacion casoDeUsoTramiteModificacion
+@inject CasoDeUsoTramiteConsultaId casoDeUsoExpedienteConsultaPorId
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+<h2> Modificando tramite número @idTramite</h2>
+<div>
+    <label> Contenido:</label>
+    <input placeholder=@aux.Contenido @bind-value="tra.Contenido">
+    <label> Etiqueta </label>
+    <select @bind="@tra.Etiqueta">
+        <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
+        <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
+        <option value="@EtiquetaTramite.Despacho"> Despachado</option>
+        <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
+        <option value="@EtiquetaTramite.Notificacion">Notificación</option>
+        <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
+    </select>
+</div>
+<button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
+
+@if (mensajeError != "")
+{
+    <div class="alert alert-danger margin" role="alert">
+        <strong>Error!</strong> @mensajeError.
+        <button type="button" class="close" @onclick="CerrarError">x</button>
+    </div>
+}
+@code
+{
+    [Parameter]
+    public int idTramite { get; set; }
+    [Parameter]
+    public int Id { get; set; }
+
+#nullable disable
+    Tramite tra;
+    Tramite aux;
+#nullable enable
+    string mensajeError = "";
+    private void CerrarError() => mensajeError = "";
+    private void Modificar()
+    {
+        try
+        {
+            casoDeUsoTramiteModificacion.Ejecutar(Id, tra);
+            Navigation.NavigateTo($"/{Id}");
+        }
+        catch (Exception e)
+        {
+            mensajeError = e.Message;
+        }
+    }
+    protected override void OnParametersSet()
+    {
+        tra = casoDeUsoExpedienteConsultaPorId.Ejecutar(idTramite);
+        aux = new() { Contenido = tra.Contenido };
+
+    }
+
+
+}
+
+
+<style>
+    .margin {
+        margin-bottom: 10px;
+        margin-top: 30px;
+
+    }
+</style>
