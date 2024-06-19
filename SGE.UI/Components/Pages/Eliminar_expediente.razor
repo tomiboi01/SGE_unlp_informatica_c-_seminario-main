@@ -4,8 +4,8 @@
 @inject NavigationManager Navigation
 @using SGE.Repositorios
 @using SGE.Aplicacion
+@rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja caso
-
 
 @code
 {
@@ -17,24 +17,31 @@
 
 
 
-    protected override void OnInitialized()
+
+    protected override void OnAfterRender(bool firstRender)
     {
-        try{
-            if (Id == null || IdExp == null)
-            {
-                Navigation.NavigateTo("/");
-            }
-            else
+
+        if (Id == null || IdExp == null)
+        {
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            try
             {
                 caso.Ejecutar(Id.Value, IdExp.Value);
-                Navigation.NavigateTo($"/{Id.Value}");
+                Navigation.NavigateTo($"/{Id}");
+
+            }
+            catch 
+            {
+                
+                Navigation.NavigateTo($"/{Id}");
+
             }
         }
-        catch (Exception e)
-        {
-           Console.WriteLine(e.Message);
-            }
-    }
+        
 
   
+}
 }

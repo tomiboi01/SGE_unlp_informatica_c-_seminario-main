@@ -22,6 +22,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/AgregarTramite.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ3JlZ2FyVHJhbWl0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Eliminar_expediente.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbGltaW5hcl9leHBlZGllbnRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Listar_Tramites.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMaXN0YXJfVHJhbWl0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/tomic/OneDrive/Escritorio/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Login.razor]

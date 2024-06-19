@@ -2,16 +2,10 @@
  using SGE.Aplicacion;
 using SGE.UI.Components;
 using SGE.Aplicacion.Servicios;
+using SGE.UI.Components.Pages;
 var builder = WebApplication.CreateBuilder(args);
-// acceder a la base de datos desde los servicios
-// consultar devolver enumerable o lista en los repositorios
-// Add services to the container.
-// verificar persimos en el caso de uso o en el frontend
-// verificar hay un usuario con el mismo nombre 
-// tirar autorizacion y validacionexce1ption en casos de uso o sus respectivas clases?
-// actualizar estado esta mal que el date time now este en el repositorio
-//consultar caso alta
-// usar servicio o caso de uso en el loggin
+//
+
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
@@ -51,6 +45,11 @@ app.UseAntiforgery();
 SGESqlite.Inicializar();
 
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+
+Expediente e = new Expediente("asdf");
+CasoDeUsoExpedienteAlta c = new CasoDeUsoExpedienteAlta(new ExpedienteSqlite(), new ServicioAutorizacion(new UsuarioSqlite()));
+c.Ejecutar(1,e);
+
 
 app.Run();
 

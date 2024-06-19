@@ -20,7 +20,7 @@
 </EditForm>
 @if (Loggeado)
 {
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger " role="alert">
             <strong class=>Usuario no valido!</strong>
             <button type="button" class="close" @onclick="Cerrar">x</button>
         </div>
@@ -48,4 +48,18 @@
     }
 
     private void Cerrar() => Loggeado = false;
+
+
 }
+<style>
+    .margin {
+        margin-bottom: 10px;
+        margin-top: 30px;
+        
+    }
+.right_header {
+    color: #fff;
+    float: right;
+    margin:50px 40px 0px 0px;
+}
+</style>

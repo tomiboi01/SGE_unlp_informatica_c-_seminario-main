@@ -12,7 +12,7 @@ public class ExpedienteValidador
         }
         if (string.IsNullOrWhiteSpace(expediente.Caratula))
         {
-            mensajeError += "Nombre del producto inválido.\n";
+            mensajeError += "Carátula inválida.\n";
         }
         if (usuario <= 0)
         {

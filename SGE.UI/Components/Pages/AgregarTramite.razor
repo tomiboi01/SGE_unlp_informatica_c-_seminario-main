@@ -1,0 +1,58 @@
+@page "/tramite/agregarTramite/{Id:int?}/{IdExp:int?}"
+
+
+@inject CasoDeUsoTramiteAlta casoDeUsoTramiteAlta
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<h3>Agregar Tramite</h3>
+
+<label> Contenido </label>
+<input @bind=@tramite.Contenido>
+<label> Etiqueta </label>
+<select @bind="@tramite.Etiqueta">
+    <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
+    <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
+    <option value="@EtiquetaTramite.Despacho"> Despachado</option>
+    <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
+    <option value="@EtiquetaTramite.Notificacion">Notificación</option>
+    <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
+</select>
+
+<button class="btn btn-primary" @onclick="Agregar">Agregar</button>
+
+@if (mensajeError != "")
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error!</strong> @mensajeError.
+        <button type="button" class="close" @onclick="cerrarError">x</button>
+    </div>
+}
+
+@code
+{
+    private Tramite tramite = new();
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public int IdExp { get; set; }
+
+    private string mensajeError = "";
+
+    private void cerrarError() => mensajeError = "";
+    private void Agregar()
+    {
+        try
+        {
+            tramite.ExpedienteId = IdExp;
+            casoDeUsoTramiteAlta.Ejecutar(Id, tramite);
+            Navigation.NavigateTo($"/{Id}");
+
+        }
+        catch (Exception e)
+        {
+            mensajeError = e.Message;
+        }
+    }
+
+} 

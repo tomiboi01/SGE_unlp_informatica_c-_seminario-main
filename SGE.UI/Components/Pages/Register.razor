@@ -64,7 +64,7 @@ if (NoValido)
             try
             {
                 casoDeUsoUsuarioAlta.Ejecutar(1,user);
-                Navigation.NavigateTo("/{user.Id}");
+                Navigation.NavigateTo($"/{user.Id}");
             }  
             catch 
             {
