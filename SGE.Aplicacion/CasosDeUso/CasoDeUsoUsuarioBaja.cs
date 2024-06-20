@@ -1,6 +1,4 @@
-﻿using SGE.Aplicacion;
-
-namespace SGE.Aplicacion;
+﻿namespace SGE.Aplicacion;
 
 public class CasoDeUsoUsuarioBaja(IUsuarioRepositorio usuarioRepositorio) : AbstractCasoDeUsoUsuario(usuarioRepositorio)
 {

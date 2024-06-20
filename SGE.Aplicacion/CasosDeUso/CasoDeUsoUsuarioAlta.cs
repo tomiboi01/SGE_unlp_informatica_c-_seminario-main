@@ -1,5 +1,4 @@
-﻿using SGE.Aplicacion;
-namespace SGE.Aplicacion;
+﻿namespace SGE.Aplicacion;
 
 public class CasoDeUsoUsuarioAlta(IUsuarioRepositorio usuarioRepositorio) : AbstractCasoDeUsoUsuario(usuarioRepositorio)
 {
@@ -14,7 +13,7 @@ public class CasoDeUsoUsuarioAlta(IUsuarioRepositorio usuarioRepositorio) : Abst
         {
             throw new ValidacionException(mensajeError);
         }
-
+        usuario.Contraseña = Hashing.Hashear(usuario.Contraseña);
         RepositorioUsu.Alta(usuario);
     }
 

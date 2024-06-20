@@ -8,12 +8,12 @@ public class CasoDeUsoUsuarioModificar(IUsuarioRepositorio usuarioRepositorio) :
         {
             throw new AutorizacionExcepcion("No tiene permisos para modificar el usuario");
         }
-        
+
         if (!UsuarioValidador.Validar(usuario, out string mensajeErorr))
         {
             throw new ValidacionException(mensajeErorr);
         }
-
+        usuario.Contraseña = Hashing.Hashear(usuario.Contraseña);
         RepositorioUsu.ModificarUsuario(usuario);
 
 

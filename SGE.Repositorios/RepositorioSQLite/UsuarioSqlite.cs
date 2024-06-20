@@ -11,7 +11,6 @@ public class UsuarioSqlite : IUsuarioRepositorio
     readonly SGEContext _context = new();
     public void Alta(Usuario usuario)
     {
-        usuario.Contraseña = Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(usuario.Contraseña)));
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
     }
@@ -32,7 +31,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
         if (user != null)
         {
             user.Nombre = usuario.Nombre;
-            user.Contraseña = Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(usuario.Contraseña)));
+            user.Contraseña = usuario.Contraseña;
             user.Apellido = usuario.Apellido;
             user.CorreoElectronico = usuario.CorreoElectronico;
             _context.SaveChanges();
@@ -42,7 +41,6 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public Usuario ObtenerUsuario(string correo, string contraseña)
     {
-        contraseña = Encoding.UTF8.GetString(SHA256.HashData(Encoding.UTF8.GetBytes(contraseña)));
         var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == contraseña).SingleOrDefault();
         if (user != null)
         {
@@ -71,7 +69,7 @@ public class UsuarioSqlite : IUsuarioRepositorio
             user.Permisos[(int)permiso] = true;
             _context.SaveChanges();
         }
-        else 
+        else
             throw new RepositorioException("Usuario no encontrado");
     }
 

@@ -1,6 +1,5 @@
 @page "/expediente/modificar/{Id:int}/{IdExp:int}"
 @inject NavigationManager Navigation
-@using SGE.Aplicacion
 @inject CasoDeUsoExpedienteModificacion casoDeUsoExpedienteModificar
 @inject CasoDeUsoExpedienteConsultaPorId casoDeUsoExpedienteConsultaPorId
 @inject NavigationManager Navigation
@@ -8,47 +7,48 @@
 <h2> Modificando expediente número @IdExp</h2>
 <div>
   <label> Caratula:</label>
-  <input placeholder=@aux.Caratula @bind-value = "exp.Caratula">
+  <input placeholder=@aux.Caratula @bind-value="exp.Caratula">
 </div>
 <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
- 
+
 @if (mensajeError != "")
 {
-    <div class="alert alert-danger margin" role="alert">
-        <strong>Error!</strong> @mensajeError.
-        <button type="button" class="close" @onclick="CerrarError">x</button>
-    </div>
+  <div class="alert alert-danger margin" role="alert">
+    <strong>Error!</strong> @mensajeError.
+    <button type="button" class="close" @onclick="CerrarError">x</button>
+  </div>
 }
 @code
 {
-    [Parameter]
-    public int IdExp { get; set; }
-    [Parameter]
-    public int Id { get; set; }
+  [Parameter]
+  public int IdExp { get; set; }
+  [Parameter]
+  public int Id { get; set; }
 
-    #nullable disable
-    Expediente exp;
-    Expediente aux;
-    #nullable enable
-    string mensajeError = "";
-    private void CerrarError() => mensajeError = "";
-    private void Modificar()
+#nullable disable
+  Expediente exp;
+  Expediente aux;
+#nullable enable
+  string mensajeError = "";
+  private void CerrarError() => mensajeError = "";
+  private void Modificar()
+  {
+    try
     {
-      try{
-        casoDeUsoExpedienteModificar.Ejecutar(Id, exp);
-        Navigation.NavigateTo($"/{Id}");
-      }
-      catch (Exception e)
-      {
-        mensajeError =e.Message;
-      }
+      casoDeUsoExpedienteModificar.Ejecutar(Id, exp);
+      Navigation.NavigateTo($"/{Id}");
     }
-    protected override void OnParametersSet()
+    catch (Exception e)
     {
-      exp = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdExp);
-      aux = new(){Caratula = exp.Caratula};
-      
+      mensajeError = e.Message;
     }
+  }
+  protected override void OnParametersSet()
+  {
+    exp = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdExp);
+    aux = new() { Caratula = exp.Caratula };
+
+  }
 
 
 }
@@ -56,6 +56,6 @@
   .margin {
     margin-bottom: 10px;
     margin-top: 30px;
-    
+
   }
 </style>

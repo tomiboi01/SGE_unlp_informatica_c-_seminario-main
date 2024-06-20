@@ -22,6 +22,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Inicio.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xJbmljaW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/AgregarTramite.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ3JlZ2FyVHJhbWl0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,10 +48,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Inicio.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbmljaW8ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Login.razor]
@@ -76,18 +76,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/MostrarUsuarios.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb3N0cmFyVXN1YXJpb3MucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Perfil.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQZXJmaWwucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Sadf.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTYWRmLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Routes.razor]

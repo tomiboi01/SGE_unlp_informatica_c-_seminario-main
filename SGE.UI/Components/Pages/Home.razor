@@ -1,13 +1,10 @@
 ﻿@page "/{Id:int?}"
 
-@using SGE.Aplicacion
 @using SGE.Aplicacion.Servicios
 @inject NavigationManager Navigation
-@using SGE.Repositorios
 @rendermode InteractiveServer
 @inject ManejarLogin manejarLogin
 @inject CasoDeUsoUsuarioObtenerPorId casoDeUsoObtenerUsuario
-@using SGE.Aplicacion.CasosDeUso;
 @inject CasoDeUsoExpedienteConsultaTodos casoDeUsoExpedienteConsultaTodos
 @inject IServicioAutorizacion ServicioAutorizacion
 <PageTitle>Inicio</PageTitle>
@@ -24,6 +21,7 @@ else{
             <div>
                 <div>
                     <h1>Bienvenido @user.Nombre @user.Apellido </h1>
+                   <button class="btn btn-primary" type="submit" @onclick="modificarPerfil"> Modificar Perfil </button>
                 </div>
                 <div class="row">
                     <div >
@@ -230,6 +228,9 @@ else{
     }
     private void agregarTramite(int idExpediente){
         Navigation.NavigateTo($"/tramite/agregar/{Id}/{idExpediente}");
+    }
+    private void modificarPerfil(){
+        Navigation.NavigateTo($"/usuarios/modificar/{Id}/{Id}");
     }
 
    

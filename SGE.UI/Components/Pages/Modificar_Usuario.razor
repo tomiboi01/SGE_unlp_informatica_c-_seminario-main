@@ -1,4 +1,4 @@
-@page "/usuarios/modificar/{idUsuario:int}"
+@page "/usuarios/modificar/{Id:int}/{idUsuario:int}"
 @inject NavigationManager Navigation
 @using SGE.Aplicacion
 @inject CasoDeUsoUsuarioModificar casoDeUsoUsuarioModificar
@@ -6,20 +6,41 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
-<EditForm Model="@user">
-    <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <InputText id="nombre" placeholer="aux.Nombre" @bind-Value="user.Nombre" class="form-control margin" />
-        <label for="apellido">Apellido:</label>
-        <InputText id="apellido" placeholer="aux.Apellido" @bind-Value="user.Apellido" class="form-control margin" />
-        <label for="correoelectronico">Correo electrónico:</label>
-        <InputText id="correoelectronico" placeholer="aux.CorreoElectronico" @bind-Value="user.CorreoElectronico"
-            class="form-control margin" />
-        <label for="contraseña">Contraseña:</label>
-        <InputText type="password" id="contraseña" @bind-Value="aux.Contraseña" class="form-control margin" />
-    </div>
-</EditForm>
-<button type="submit" @onclick="Modificar" class="btn btn-primary margin">Registrar</button>
+<h2>
+    <p>Modificando usuario con id: @idUsuario </p>
+</h2>
+
+<label>Nombre:</label>
+<input type="text" placeholder="aux.Nombre" @bind="user.Nombre" />
+<label>Apellido:</label>
+<input type="text" placeholder="aux.Apellido" @bind="user.Apellido" />
+<label>Correo electrónico:</label>
+<input type="email" placeholder="aux.CorreoElectronico" @bind="user.CorreoElectronico" />
+<label>Contraseña:</label>
+<input type="password" placeholder="aux.Contraseña" @bind="user.Contraseña" />
+@if (Id == 1)
+{
+    @if (idUsuario != 1)
+    {
+        <label> @per[0].ToString() </label>
+        <input type="checkbox" @bind="user.Permisos[0]" />
+        <label> @per[1].ToString() </label>
+        <input type="checkbox" @bind="user.Permisos[1]" />
+        <label> @per[2].ToString() </label>
+        <input type="checkbox" @bind="user.Permisos[2]" />
+        <label> @per[3].ToString() </label>
+        <input type="checkbox" @bind="user.Permisos[3]" />
+        <label> @per[4].ToString() </label>
+        <input type="checkbox" @bind="user.Permisos[4]" />
+        <label> @per[5].ToString() </label>
+        <input type=" checkbox" @bind="user.Permisos[5]" />
+    }
+    else
+    {
+        <p> Usted tiene todos los permisos </p>
+    }
+}
+<button type=" submit" @onclick="Modificar" class="btn btn-primary margin">Modificar</button>
 
 @if (mensajeError != "")
 {
@@ -30,10 +51,11 @@
 }
 @code
 {
-
+    [Parameter]
+    public int Id { get; set; }
     [Parameter]
     public int idUsuario { get; set; }
-
+    Permiso[] per = Enum.GetValues(typeof(Permiso)).Cast<Permiso>().ToArray();
 #nullable disable
     Usuario user;
     Usuario aux;
@@ -58,8 +80,6 @@
         aux = user;
 
     }
-
-
 }
 
 
@@ -67,6 +87,7 @@
     .margin {
         margin-bottom: 10px;
         margin-top: 30px;
+        display: inline-block;
 
     }
 </style>
