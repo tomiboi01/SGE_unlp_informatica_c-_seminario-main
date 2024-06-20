@@ -3,6 +3,7 @@
 @inject CasoDeUsoUsuarioObtenerTodos casoDeUsoObtenerUsuarios
 @inject NavigationManager Navigation
 @inject IServicioAutorizacion ServicioAutorizacion
+@rendermode InteractiveServer
 
 @if (Id != 1)
 {
@@ -12,15 +13,29 @@
 }
 else
 {
-    @foreach( Usuario user in usuarios)
+    @foreach (Usuario user in usuarios)
     {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">@user.Nombre</h5>
-                <button class="btn btn-primary" @onclick="() =>Modificar(user.Id)"> Modificar</button> 
-            <div class="nav-item px-3">
-            <i class="bi bi-pencil-fill"></i>
-        </div>                <p class="card-text">@user.CorreoElectronico</p>
+                <h6 class="card-text ">@user.Apellido</h6>
+                <p class="card-text">@user.CorreoElectronico</p>
+                <div class="nav-item px-3">
+                    <button class="btn btn-primary" type="submit" @onclick="() =>Modificar(user.Id)"> Modificar</button>
+                    <button class="btn btn-primary" type="submit" @onclick="() =>Eliminar(user.Id)"> Eliminar</button>
+
+                    @for (int i = 0; i < user.Permisos.Count(); i++)
+                    {
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="checkbox-@i" @bind="user.Permisos[i]"
+                                />
+                        </div>
+
+                    }
+
+                </div>
+
+
             </div>
         </div>
     }
@@ -32,10 +47,10 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    #nullable disable
+#nullable disable
     public List<Usuario> usuarios;
-    #nullable enable
 
+    List<Permiso> permiso = new List<Permiso>();
     protected override void OnInitialized()
     {
         if (Id == 1)
@@ -45,6 +60,16 @@ else
 
     }
 
-    private void Modificar (int idUsuario){}
+    private void Modificar(int idUsuario)
+    {
+        Navigation.NavigateTo($"/usuarios/modificar/{idUsuario}");
+    }
+    private void Eliminar(int idUsuario)
+    {
+        Navigation.NavigateTo($"/usuario/eliminar/{idUsuario}");
+    }
+    private void cambiarpermiso(int i)
+    {
+    }
 
 }

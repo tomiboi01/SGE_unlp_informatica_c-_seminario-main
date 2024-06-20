@@ -1,0 +1,37 @@
+@page "/usuario/eliminar/{idUsuario:int?}"
+@inject NavigationManager Navigation
+@using SGE.Aplicacion
+@inject CasoDeUsoUsuarioBaja casoDeUsoUsuarioBaja
+@rendermode InteractiveServer
+
+
+
+@code {
+    [Parameter]
+    public int? idUsuario { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+        if (idUsuario == null)
+        {
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            try
+            {
+                casoDeUsoUsuarioBaja.Ejecutar(idUsuario.Value);
+                Navigation.NavigateTo($"/usuarios/1");
+
+            }
+            catch
+            {
+
+                Navigation.NavigateTo($"/usuarios/1");
+
+            }
+        }
+
+    }
+
+}

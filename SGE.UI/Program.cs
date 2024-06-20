@@ -1,5 +1,5 @@
- using SGE.Repositorios;
- using SGE.Aplicacion;
+using SGE.Repositorios;
+using SGE.Aplicacion;
 using SGE.UI.Components;
 using SGE.Aplicacion.Servicios;
 using SGE.UI.Components.Pages;
@@ -23,13 +23,12 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
                 .AddTransient<CasoDeUsoTramiteConsultaId>()
                 .AddTransient<CasoDeUsoUsuarioAlta>()
                 .AddTransient<CasoDeUsoUsuarioBaja>()
+                .AddTransient<CasoDeUsoUsuarioModificar>()
                 .AddTransient<CasoDeUsoUsuarioObtenerPorId>()
                 .AddTransient<CasoDeUsoUsuarioObtenerTodos>()
                 .AddTransient<IEspecificacionCambioDeEstado, EspecificacionCambioDeEstado>()
                 .AddTransient<IServicioAutorizacion, ServicioAutorizacion>()
                 .AddTransient<ManejarLogin>();
-
-
 ;
 
 
@@ -50,7 +49,7 @@ app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 Expediente e = new Expediente("asdf");
 CasoDeUsoExpedienteAlta c = new CasoDeUsoExpedienteAlta(new ExpedienteSqlite(), new ServicioAutorizacion(new UsuarioSqlite()));
-c.Ejecutar(1,e);
+c.Ejecutar(1, e);
 
 
 app.Run();
