@@ -1,18 +1,16 @@
-@page "/tramite/eliminar/{Id:int?}/{idTramite:int?}"
+@page "/tramite/eliminar/{Id:int}/{idTramite:int}"
 
-@inject  CasoDeUsoTramiteBaja caso
+@inject CasoDeUsoTramiteBaja caso
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
-@using SGE.Repositorios
-@using SGE.Aplicacion
-
+@inject IServicioAutorizacion ServicioAutorizacion
 @code
 {
 
     [Parameter]
-    public int? idTramite { get; set; }
+    public int idTramite { get; set; }
     [Parameter]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
 
 
@@ -20,7 +18,7 @@
     protected override void OnAfterRender(bool firstRender)
     {
 
-        if (Id == null || idTramite == null)
+        if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteBaja))
         {
             Navigation.NavigateTo("/");
         }
@@ -28,19 +26,16 @@
         {
             try
             {
-                caso.Ejecutar(Id.Value, idTramite.Value);
-                Navigation.NavigateTo($"/{Id}");
+                caso.Ejecutar(Id, idTramite);
 
             }
-            catch 
+            finally
             {
-                
                 Navigation.NavigateTo($"/{Id}");
-
             }
         }
-        
 
-  
-}
+
+
+    }
 }

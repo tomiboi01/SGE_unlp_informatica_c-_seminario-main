@@ -1,0 +1,58 @@
+@page "/expediente/agregar/{Id:int}"
+@rendermode InteractiveServer
+@inject IServicioAutorizacion ServicioAutorizacion
+@inject CasoDeUsoExpedienteAlta CasoDeUsoExpedienteAlta
+@inject NavigationManager Navigation
+
+@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteAlta))
+{
+    <div class="margin">
+        <label>Carátula</label>
+        <input type="text" @bind="expediente.Caratula" />
+        <button class="btn btn-primary" @onclick="Guardar">Guardar</button>
+    </div>
+    @if (mensajeError != "")
+    {
+        <div class="alert alert-danger margin alinear" role="alert">
+            <strong>Error!</strong> @mensajeError
+            <button type="button" class="close" @onclick="Cerrar">x</button>
+        </div>
+    }
+
+
+    <p class="margin"> Todos los expedientes se inician con estado Recien Iniciado </p>
+}
+else
+{
+    <div class="alert alert-danger margin alinear" role="alert">
+        <strong>Error!</strong> @mensajeError.
+    </div>
+    <button @onclick="Volver">Volver</button>
+}
+@code {
+    Expediente expediente = new Expediente();
+    string mensajeError = "";
+    [Parameter]
+    public int Id { get; set; }
+    private void Guardar()
+    {
+        try
+        {
+            CasoDeUsoExpedienteAlta.Ejecutar(Id, expediente);
+            Navigation.NavigateTo($"/{Id}");
+        }
+        catch (Exception ex)
+        {
+            mensajeError = ex.Message;
+        }
+    }
+    private void Volver()
+    {
+        Navigation.NavigateTo($"/{Id}");
+    }
+    private void Cerrar()
+    {
+        mensajeError = "";
+
+    }
+}

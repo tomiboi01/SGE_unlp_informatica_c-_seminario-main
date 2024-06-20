@@ -4,28 +4,40 @@
 @inject CasoDeUsoTramiteModificacion casoDeUsoTramiteModificacion
 @inject CasoDeUsoTramiteConsultaId casoDeUsoExpedienteConsultaPorId
 @inject NavigationManager Navigation
+@inject IServicioAutorizacion ServicioAutorizacion
 @rendermode InteractiveServer
-<h2> Modificando tramite número @idTramite</h2>
-<div>
-    <label> Contenido:</label>
-    <input placeholder=@aux.Contenido @bind-value="tra.Contenido">
-    <label> Etiqueta </label>
-    <select @bind="@tra.Etiqueta">
-        <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
-        <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
-        <option value="@EtiquetaTramite.Despacho"> Despachado</option>
-        <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
-        <option value="@EtiquetaTramite.Notificacion">Notificación</option>
-        <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
-    </select>
-</div>
-<button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
-
-@if (mensajeError != "")
+@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteModificacion))
 {
-    <div class="alert alert-danger margin" role="alert">
-        <strong>Error!</strong> @mensajeError.
-        <button type="button" class="close" @onclick="CerrarError">x</button>
+    <h2> Modificando tramite número @idTramite</h2>
+    <div>
+        <label> Contenido:</label>
+        <input placeholder=@aux.Contenido @bind-value="tra.Contenido">
+        <label> Etiqueta </label>
+        <select @bind="@tra.Etiqueta">
+            <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
+            <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
+            <option value="@EtiquetaTramite.Despacho"> Despachado</option>
+            <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
+            <option value="@EtiquetaTramite.Notificacion">Notificación</option>
+            <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
+        </select>
+    </div>
+    <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
+
+    @if (mensajeError != "")
+    {
+        <div class="alert alert-danger margin" role="alert">
+            <strong>Error!</strong> @mensajeError.
+            <button type="button" class="close" @onclick="CerrarError">x</button>
+        </div>
+    }
+
+}
+else
+{
+    <div class="alert alert-danger " role="alert">
+        <strong class>No tiene los pérmisos necesarios para realizar esta operación</strong>
+        <button type="button" class="close" href="/">x</button>
     </div>
 }
 @code

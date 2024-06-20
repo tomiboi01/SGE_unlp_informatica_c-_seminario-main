@@ -44,11 +44,6 @@ SGESqlite.Inicializar();
 
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
-Expediente e = new Expediente("asdf");
-CasoDeUsoExpedienteAlta c = new CasoDeUsoExpedienteAlta(new ExpedienteSqlite(), new ServicioAutorizacion(new UsuarioSqlite()));
-c.Ejecutar(1, e);
-
-
 app.Run();
 
 

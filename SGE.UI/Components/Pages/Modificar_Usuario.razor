@@ -17,7 +17,7 @@
 <label>Correo electrónico:</label>
 <input type="email" placeholder="aux.CorreoElectronico" @bind="user.CorreoElectronico" />
 <label>Contraseña:</label>
-<input type="password" placeholder="aux.Contraseña" @bind="user.Contraseña" />
+<input type="password" @bind="user.Contraseña" />
 @if (Id == 1)
 {
     @if (idUsuario != 1)
@@ -40,7 +40,9 @@
         <p> Usted tiene todos los permisos </p>
     }
 }
+
 <button type=" submit" @onclick="Modificar" class="btn btn-primary margin">Modificar</button>
+
 
 @if (mensajeError != "")
 {
@@ -66,8 +68,16 @@
     {
         try
         {
-            casoDeUsoUsuarioModificar.Ejecutar(1, user);
-            Navigation.NavigateTo($"/usuarios/{1}");
+            casoDeUsoUsuarioModificar.Ejecutar(user);
+            if (Id == 1)
+            {
+                Navigation.NavigateTo($"/usuarios/{Id}");
+            }
+            else
+            {
+                Navigation.NavigateTo($"/{Id}");
+
+            }
         }
         catch (Exception e)
         {

@@ -1,19 +1,16 @@
-@page "/expediente/eliminar/{Id:int?}/{IdExp:int?}"
-
-
+@page "/expediente/eliminar/{Id:int}/{IdExp:int}"
 @inject NavigationManager Navigation
-@using SGE.Repositorios
-@using SGE.Aplicacion
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja caso
+@inject IServicioAutorizacion ServicioAutorizacion
 
 @code
 {
 
     [Parameter]
-    public int? IdExp { get; set; }
+    public int IdExp { get; set; }
     [Parameter]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
 
 
@@ -21,7 +18,7 @@
     protected override void OnAfterRender(bool firstRender)
     {
 
-        if (Id == null || IdExp == null)
+        if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteBaja))
         {
             Navigation.NavigateTo("/");
         }
@@ -29,19 +26,15 @@
         {
             try
             {
-                caso.Ejecutar(Id.Value, IdExp.Value);
-                Navigation.NavigateTo($"/{Id}");
-
+                caso.Ejecutar(Id, IdExp);
             }
-            catch 
+            finally
             {
-                
                 Navigation.NavigateTo($"/{Id}");
-
             }
         }
-        
 
-  
-}
+
+
+    }
 }

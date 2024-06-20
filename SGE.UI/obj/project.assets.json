@@ -1221,19 +1221,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tomic\\.nuget\\packages\\": {}
+    "C:\\Users\\fedec\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\SGE.UI.csproj",
+      "projectUniqueName": "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\SGE.UI.csproj",
       "projectName": "SGE.UI",
-      "projectPath": "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\SGE.UI.csproj",
-      "packagesPath": "C:\\Users\\tomic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\obj\\",
+      "projectPath": "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\SGE.UI.csproj",
+      "packagesPath": "C:\\Users\\fedec\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tomic\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\fedec\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1245,11 +1245,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+            "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+              "projectPath": "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
             },
-            "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.Repositorios\\SGE.Repositorios.csproj": {
-              "projectPath": "C:\\Users\\tomic\\OneDrive\\Escritorio\\SGE_unlp_informatica_c-_seminario-main\\SGE.Repositorios\\SGE.Repositorios.csproj"
+            "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.Repositorios\\SGE.Repositorios.csproj": {
+              "projectPath": "C:\\Users\\fedec\\Downloads\\SGE_unlp_informatica_c-_seminario-main\\SGE.Repositorios\\SGE.Repositorios.csproj"
             }
           }
         }
@@ -1287,7 +1287,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

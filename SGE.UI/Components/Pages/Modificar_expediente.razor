@@ -3,19 +3,31 @@
 @inject CasoDeUsoExpedienteModificacion casoDeUsoExpedienteModificar
 @inject CasoDeUsoExpedienteConsultaPorId casoDeUsoExpedienteConsultaPorId
 @inject NavigationManager Navigation
+@inject IServicioAutorizacion ServicioAutorizacion
 @rendermode InteractiveServer
-<h2> Modificando expediente número @IdExp</h2>
-<div>
-  <label> Caratula:</label>
-  <input placeholder=@aux.Caratula @bind-value="exp.Caratula">
-</div>
-<button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
-
-@if (mensajeError != "")
+@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteModificacion))
 {
-  <div class="alert alert-danger margin" role="alert">
-    <strong>Error!</strong> @mensajeError.
-    <button type="button" class="close" @onclick="CerrarError">x</button>
+
+  <h2> Modificando expediente número @IdExp</h2>
+  <div>
+    <label> Caratula:</label>
+    <input placeholder=@aux.Caratula @bind-value="exp.Caratula">
+  </div>
+  <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
+
+  @if (mensajeError != "")
+  {
+    <div class="alert alert-danger margin" role="alert">
+      <strong>Error!</strong> @mensajeError.
+      <button type="button" class="close" @onclick="CerrarError">x</button>
+    </div>
+  }
+}
+else
+{
+  <div class="alert alert-danger " role="alert">
+    <strong class>No tiene los pérmisos necesarios para realizar esta operación</strong>
+    <button type="button" class="close" href="/">x</button>
   </div>
 }
 @code

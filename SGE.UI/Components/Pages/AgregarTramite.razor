@@ -1,31 +1,44 @@
-@page "/tramite/agregar/{Id:int?}/{IdExp:int?}"
+@page "/tramite/agregar/{Id:int}/{IdExp:int}"
 
 
 @inject CasoDeUsoTramiteAlta casoDeUsoTramiteAlta
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
-
-<h3>Agregar Tramite</h3>
-
-<label> Contenido </label>
-<input @bind=@tramite.Contenido>
-<label> Etiqueta </label>
-<select @bind="@tramite.Etiqueta">
-    <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
-    <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
-    <option value="@EtiquetaTramite.Despacho"> Despachado</option>
-    <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
-    <option value="@EtiquetaTramite.Notificacion">Notificación</option>
-    <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
-</select>
-
-<button class="btn btn-primary" @onclick="Agregar">Agregar</button>
-
-@if (mensajeError != "")
+@inject IServicioAutorizacion ServicioAutorizacion
+@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteAlta))
 {
-    <div class="alert alert-danger" role="alert">
-        <strong>Error!</strong> @mensajeError.
-        <button type="button" class="close" @onclick="cerrarError">x</button>
+    <h3>Agregar Tramite</h3>
+
+
+
+    <label> Contenido </label>
+    <input @bind=@tramite.Contenido>
+    <label> Etiqueta </label>
+    <select @bind="@tramite.Etiqueta">
+        <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
+        <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
+        <option value="@EtiquetaTramite.Despacho"> Despachado</option>
+        <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
+        <option value="@EtiquetaTramite.Notificacion">Notificación</option>
+        <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
+    </select>
+
+    <button class="btn btn-primary" @onclick="Agregar">Agregar</button>
+
+    @if (mensajeError != "")
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Error!</strong> @mensajeError.
+            <button type="button" class="close" @onclick="cerrarError">x</button>
+        </div>
+    }
+
+}
+else
+{
+    <div class="alert alert-danger " role="alert">
+        <strong class>No tiene los pérmisos necesarios para realizar esta operación</strong>
+        <button type="button" class="close" href="/">x</button>
     </div>
 }
 
