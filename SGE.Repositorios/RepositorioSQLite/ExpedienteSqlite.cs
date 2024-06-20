@@ -1,7 +1,6 @@
 ﻿namespace SGE.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using AL.Repositorios.RepositoriosSQLite;
 using SGE.Aplicacion;
 public class ExpedienteSqlite : IExpedienteRepositorio
 {
@@ -45,7 +44,7 @@ public class ExpedienteSqlite : IExpedienteRepositorio
     {
         using var _context = new SGEContext();
         Expediente? e = _context.Expedientes.Include(e => e.Tramites).Where(a => a.Id == idExpediente).SingleOrDefault();
-        
+
         if (e != null)
         {
             return e;
@@ -61,7 +60,7 @@ public class ExpedienteSqlite : IExpedienteRepositorio
         using var _context = new SGEContext();
 
         return _context.Expedientes.Where(e => e.Estado == estado).ToList();
-        
+
     }
 
     public List<Expediente> ListarTodos()

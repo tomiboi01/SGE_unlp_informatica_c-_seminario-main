@@ -2,9 +2,10 @@
 
 public class CasoDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
 {
+    private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
     public void Ejecutar(int usuario, Tramite tramite)
     {
-        if (!servicioAutorizacion.PoseeElPermiso(usuario, Permiso.TramiteModificacion))
+        if (!ServicioDeAutorizacion.PoseeElPermiso(usuario, Permiso.TramiteModificacion))
             throw new AutorizacionExcepcion("No posee el permiso");
 
         if (!TramiteValidador.Validar(tramite, usuario, out string mensajeError))

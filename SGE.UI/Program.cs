@@ -1,13 +1,10 @@
 using SGE.Repositorios;
 using SGE.Aplicacion;
 using SGE.UI.Components;
-using SGE.Aplicacion.Servicios;
-using SGE.UI.Components.Pages;
 var builder = WebApplication.CreateBuilder(args);
 //
 
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
-
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
                 .AddScoped<IExpedienteRepositorio, ExpedienteSqlite>()
                 .AddScoped<ITramiteRepositorio, TramiteSqlite>()

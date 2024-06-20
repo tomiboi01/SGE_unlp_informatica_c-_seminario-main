@@ -1,5 +1,4 @@
 namespace SGE.Aplicacion;
-using SGE.Aplicacion;
 public class ServicioAutorizacion(IUsuarioRepositorio repositorioUsuario) : IServicioAutorizacion
 {
 

@@ -1,6 +1,5 @@
 
 namespace SGE.Aplicacion;
-using System.Security.Cryptography;
 
 public class Usuario
 {

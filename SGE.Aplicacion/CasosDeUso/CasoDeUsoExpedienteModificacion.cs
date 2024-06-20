@@ -4,9 +4,10 @@ namespace SGE.Aplicacion;
 
 public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion) : AbstractCasoDeUsoExpediente(expedienteRepositorio)
 {
+    private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
     public void Ejecutar(int idUsuario, Expediente expediente)
     {
-        if (!servicioAutorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
+        if (!ServicioDeAutorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
             throw new AutorizacionExcepcion("No posee el permiso");
 
         if (!ExpedienteValidador.Validar(expediente, idUsuario, out string mensajeError))

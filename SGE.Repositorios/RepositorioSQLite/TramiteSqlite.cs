@@ -1,6 +1,6 @@
 ﻿namespace SGE.Repositorios;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using AL.Repositorios.RepositoriosSQLite;
 using SGE.Aplicacion;
 public class TramiteSqlite : ITramiteRepositorio
 {
@@ -36,7 +36,7 @@ public class TramiteSqlite : ITramiteRepositorio
         //     context.RemoveRange(tramitesBorrar);
         // }
         // context.SaveChanges();
-        
+
         //No hace falta implementarlo ya que SQlite ya lo hace por nosotros
     }
 

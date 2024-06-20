@@ -1,6 +1,6 @@
 ﻿@page "/{Id:int?}"
 
-@using SGE.Aplicacion.Servicios
+@using SGE.Aplicacion
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 @inject ManejarLogin manejarLogin
@@ -19,9 +19,9 @@ else{
 <div class="container">
         <div class="row">
             <div>
-                <div>
-                    <h1>Bienvenido @user.Nombre @user.Apellido </h1>
-                   <button class="btn btn-primary" type="submit" @onclick="modificarPerfil"> Modificar Perfil </button>
+                <h1>Bienvenido @user.Nombre @user.Apellido </h1>
+                <div class="alinear">
+                    <button class="btn btn-primary" type="submit" @onclick="modificarPerfil"> Modificar Perfil </button>
                 </div>
                 <div class="row">
                     <div >
@@ -106,8 +106,7 @@ else{
                 </div>
             </div>
         </div>
-    </div>
-}
+</div>
 
 <div class=container> 
     @foreach (List<Tramite> tramites in listaDeListas)
@@ -145,7 +144,7 @@ else{
                         }
                     @if (ServicioAutorizacion.PoseeElPermiso(user.Id,Permiso.TramiteModificacion)){
                     <td> <button class="btn btn-warning" @onclick="() => ModificarTramite(tramite.Id)">Modificar tramite </button> </td>
-}
+                        }
                     else
                         {
                             <td>  
@@ -161,6 +160,8 @@ else{
      
 }
 </div>
+}
+
 
 @code {
     
@@ -232,7 +233,7 @@ else{
     private void modificarPerfil(){
         Navigation.NavigateTo($"/usuarios/modificar/{Id}/{Id}");
     }
-
+  
    
 }
 
@@ -240,14 +241,15 @@ else{
     td, th{
         text-align: center;
     }
-    .margin {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+    
     .flex {
    display: flex;
    align-items: center;
-}
+    }
+    .alinear{
+        display: flex;
+        justify-content:;
+    }
+
+
 </style>

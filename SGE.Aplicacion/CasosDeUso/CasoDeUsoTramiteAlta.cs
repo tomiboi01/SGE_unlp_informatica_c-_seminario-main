@@ -3,10 +3,12 @@ namespace SGE.Aplicacion;
 
 public class CasoDeUsoTramiteAlta(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
 {
+    private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
+
     public void Ejecutar(int idUsuario, Tramite tramite)
     {
 
-        if (!servicioAutorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteAlta))
+        if (!ServicioDeAutorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteAlta))
             throw new AutorizacionExcepcion("No posee el permiso");
 
         if (!TramiteValidador.Validar(tramite, idUsuario, out string mensajeError))

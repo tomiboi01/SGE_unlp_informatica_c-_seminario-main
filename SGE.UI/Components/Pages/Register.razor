@@ -1,6 +1,5 @@
 @page "/register"
 @using SGE.Aplicacion
-@using SGE.Aplicacion.Servicios
 @inject NavigationManager Navigation
 @using SGE.Repositorios
 @namespace SGE.Aplicacion.CasosDeUso
@@ -54,34 +53,35 @@ if (NoValido)
     private void Agregar()
     {
 
-        try 
+        try
         {
             manejarLogin.Loggear(user.CorreoElectronico, user.Contraseña);
             YaRegistrado = true;
         }
         catch
-        { 
+        {
             try
             {
-                casoDeUsoUsuarioAlta.Ejecutar(1,user);
+                casoDeUsoUsuarioAlta.Ejecutar(1, user);
                 Navigation.NavigateTo($"/{user.Id}");
-            }  
-            catch 
+            }
+            catch
             {
                 NoValido = true;
             }
         }
         user = new();
-        
+
     }
 }
 
 <style>
-   .margin {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    .margin {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
+
     .alineadoDer {
-    align-content: ;
+        align-content: ;
     }
 </style>

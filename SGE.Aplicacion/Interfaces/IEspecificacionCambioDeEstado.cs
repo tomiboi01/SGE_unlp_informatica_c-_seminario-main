@@ -1,4 +1,3 @@
-using SGE.Aplicacion;
 namespace SGE.Aplicacion;
 public interface IEspecificacionCambioDeEstado
 {

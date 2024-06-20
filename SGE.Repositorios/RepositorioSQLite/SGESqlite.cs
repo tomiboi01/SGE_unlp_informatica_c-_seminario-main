@@ -1,6 +1,4 @@
-﻿using AL.Repositorios.RepositoriosSQLite;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
 namespace SGE.Repositorios;
 
 public class SGESqlite

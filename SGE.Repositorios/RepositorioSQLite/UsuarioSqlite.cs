@@ -1,7 +1,6 @@
 ﻿
 namespace SGE.Repositorios;
 using System.Collections.Generic;
-using AL.Repositorios.RepositoriosSQLite;
 using SGE.Aplicacion;
 using System.Security.Cryptography;
 using System.Text;

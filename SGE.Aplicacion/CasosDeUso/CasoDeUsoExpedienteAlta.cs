@@ -1,10 +1,8 @@
-﻿
-
-namespace SGE.Aplicacion
+﻿namespace SGE.Aplicacion
 {
     public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repositorio, IServicioAutorizacion servicioAutorizacion) : AbstractCasoDeUsoExpediente(repositorio)
     {
-        private IServicioAutorizacion ServicioDeAutorizacion {get;} = servicioAutorizacion;
+        private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
         public void Ejecutar(int idUsuario, Expediente expediente)
         {
             if (!ServicioDeAutorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
