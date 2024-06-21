@@ -12,20 +12,21 @@
         <h2> Modificando usuario con id: @IdUsuario</h2>
         <div class="form-group">
             <label>Nombre:</label>
-            <input type="text" class="form-control" placeholder="@aux.Nombre" @bind="user.Nombre" />
+            <input type="text" class="form-control" placeholder="@_aux.Nombre" @bind="_user.Nombre" />
         </div>
         <div class="form-group">
             <label>Apellido:</label>
-            <input type="text" class="form-control" placeholder="@aux.Apellido" @bind="user.Apellido" />
+            <input type="text" class="form-control" placeholder="@_aux.Apellido" @bind="_user.Apellido" />
         </div>
         <div class="form-group">
             <label>Correo electrónico:</label>
-            <input type="email" class="form-control" placeholder="@aux.CorreoElectronico" @bind="user.CorreoElectronico" />
+            <input type="email" class="form-control" placeholder="@_aux.CorreoElectronico"
+                @bind="_user.CorreoElectronico" />
         </div>
         <p class="verticalmargin"> Por favor, reescriba la contraseña </p>
         <div class="form-group">
-            <label>Contraseña:</label>
-            <input type="password" class="form-control" @bind="@contraseña" />
+            <label>contraseña:</label>
+            <input type="password" class="form-control" @bind="@_contraseña" />
         </div>
 
         @if (IdSesion == 1)
@@ -34,28 +35,28 @@
             {
                 <h4 class="margin"> Permisos </h4>
                 <div class="form-group">
-                    <label> @per[0].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[0]" />
+                    <label> @_per[0].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[0]" />
                 </div>
                 <div class="form-group">
-                    <label> @per[1].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[1]" />
+                    <label> @_per[1].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[1]" />
                 </div>
                 <div class="form-group">
-                    <label> @per[2].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[2]" />
+                    <label> @_per[2].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[2]" />
                 </div>
                 <div class="form-group">
-                    <label> @per[3].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[3]" />
+                    <label> @_per[3].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[3]" />
                 </div>
                 <div class="form-group">
-                    <label> @per[4].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[4]" />
+                    <label> @_per[4].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[4]" />
                 </div>
                 <div class="form-group">
-                    <label> @per[5].ToString() </label>
-                    <input type="checkbox" @bind="user.Permisos[5]" />
+                    <label> @_per[5].ToString() </label>
+                    <input type="checkbox" @bind="_user.Permisos[5]" />
                 </div>
             }
             else
@@ -70,10 +71,10 @@
     </div>
 }
 
-@if (mensajeError != "")
+@if (_mensajeError != "")
 {
     <div class="alert alert-danger alinear margin" role="alert">
-        <strong>Error!</strong> @mensajeError
+        <strong>Error!</strong> @_mensajeError
         <button type="button" class="close" @onclick="CerrarError">x</button>
     </div>
 }
@@ -83,23 +84,23 @@
     public int IdSesion { get; set; }
     [Parameter]
     public int IdUsuario { get; set; }
-    Permiso[] per = Enum.GetValues(typeof(Permiso)).Cast<Permiso>().ToArray();
+    Permiso[] _per = Enum.GetValues(typeof(Permiso)).Cast<Permiso>().ToArray();
 #nullable disable
-    Usuario aux;
-    Usuario user;
+    Usuario _aux;
+    Usuario _user;
 #nullable enable
-    string contraseña = "";
-    string mensajeError = "";
-    void CerrarError() => mensajeError = "";
+    string _contraseña = "";
+    string _mensajeError = "";
+    void CerrarError() => _mensajeError = "";
     void Modificar()
     {
         try
         {
-            if (contraseña != "")
+            if (_contraseña != "")
             {
-                user.Contraseña = contraseña;
+                _user.Contraseña = _contraseña;
             }
-            casoDeUsoUsuarioModificar.Ejecutar(user, aux.Contraseña);
+            casoDeUsoUsuarioModificar.Ejecutar(_user, _aux.Contraseña);
             if (IdSesion == 1)
             {
                 Navigation.NavigateTo($"/usuarios/{IdSesion}");
@@ -111,26 +112,26 @@
         }
         catch (Exception e)
         {
-            mensajeError = e.Message;
+            _mensajeError = e.Message;
         }
     }
     protected override void OnParametersSet()
     {
         try
         {
-            user = casoDeUsoUsuarioObtenerPorId.Ejecutar(IdUsuario);
-            aux = new()
+            _user = casoDeUsoUsuarioObtenerPorId.Ejecutar(IdUsuario);
+            _aux = new()
                 {
-                    Nombre = user.Nombre,
-                    Apellido = user.Apellido,
-                    CorreoElectronico = user.CorreoElectronico,
-                    Contraseña = user.Contraseña,
-                    Permisos = user.Permisos
+                    Nombre = _user.Nombre,
+                    Apellido = _user.Apellido,
+                    CorreoElectronico = _user.CorreoElectronico,
+                    Contraseña = _user.Contraseña,
+                    Permisos = _user.Permisos
                 };
         }
         catch
         {
-            mensajeError = "No se pudo obtener el usuario";
+            _mensajeError = "No se pudo obtener el usuario";
         }
     }
 }

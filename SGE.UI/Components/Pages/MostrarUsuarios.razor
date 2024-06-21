@@ -14,10 +14,10 @@
 else
 {
     <div class="container mt-5 ">
-        <h2 class="text-center mb-4">Lista de Usuarios</h2>
+        <h2 class="text-center mb-4">Lista de usuarios</h2>
         <div class="row">
 
-            @foreach (Usuario user in usuarios)
+            @foreach (Usuario user in _usuarios)
             {
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
@@ -43,13 +43,13 @@ else
     public int Id { get; set; }
 
 #nullable disable
-    List<Usuario> usuarios;
+    List<Usuario> _usuarios;
 #nullable enable
     protected override void OnInitialized()
     {
         if (Id == 1)
         {
-            usuarios = casoDeUsoObtenerUsuarios.Ejecutar();
+            _usuarios = casoDeUsoObtenerUsuarios.Ejecutar();
         }
 
     }

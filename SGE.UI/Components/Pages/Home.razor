@@ -36,7 +36,7 @@ else if (_usuarioExiste)
                     <button class="btn btn-primary margin"  @onclick="AgregarExpediente" >Crear expediente</button> 
                 }
                 <button class= "btn btn-primary margin" @onclick="verExpedientes" > Mostrar expedientes</button>
-                @if (ver_expedientes)
+                @if (_verExpedientes)
                 {
                     <div class="row">
                         <table class="table">
@@ -44,18 +44,20 @@ else if (_usuarioExiste)
                                 <tr>
                                     <th>Caratula</th>
                                     <th>Estado</th>
-                                    <th>Fecha de creacion</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Fecha de última modificación</th>
                                     <th>Usuario de última modificación</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Expediente expediente in expedientes)
+                                @foreach (Expediente expediente in _expedientes)
                                 {   
                                     <tr>
                                         <td>@expediente.Caratula</td>
                                         <td>@expediente.Estado</td> 
                                         <td>@expediente.FechaCreacion</td>
-                                        <td class="td">@expediente.UsuarioUltModificacion</td>
+                                        <td>@expediente.FechaUltModificacion</td>
+                                        <td>@expediente.UsuarioUltModificacion</td>
                                         @if (ServicioAutorizacion.PoseeElPermiso(_user.Id, Permiso.ExpedienteBaja))
                                         {
                                             <td> <button class="btn btn-danger" type="submit" @onclick="() => EliminarExpediente(expediente.Id)">Eliminar </button> </td>
@@ -88,7 +90,7 @@ else if (_usuarioExiste)
                                         {
                                             <td>  
                                                 <div class="alert alert-danger" role="alert">
-                                                    <strong>No posee permiso para agregar tramite</strong> 
+                                                    <strong>No posee permiso para agregar trámite</strong> 
                                                 </div> 
                                             </td>
                                         }
@@ -98,7 +100,7 @@ else if (_usuarioExiste)
                                         }
                                         else
                                         {
-                                            <td> <button  class="btn btn-primary" disabled> No tiene tramites </button> </td>
+                                            <td> <button  class="btn btn-primary" disabled> No tiene trámites </button> </td>
                                         }
 
                                     </tr>
@@ -112,17 +114,17 @@ else if (_usuarioExiste)
     </div>
     <div class="card margin">
         <div class="card-header">
-            <h3>Tramites</h3>
+            <h3>Trámites</h3>
         </div>
         <div class="card-body">
-            <button class= "btn btn-primary margin"  @onclick="verTramites"> Mostrar tramites</button>
-            <button class="btn btn-primary margin" @onclick="listarTramiteEtiqueta">Listar tramites por etiqueta</button>
+            <button class= "btn btn-primary margin"  @onclick="verTramites"> Mostrar trámites</button>
+            <button class="btn btn-primary margin" @onclick="listarTramiteEtiqueta">Listar trámites por etiqueta</button>
             @if(_verTramites)
             {
                 
-                @if (listaDeListas.Count > 0)
+                @if (_listaDeListas.Count > 0)
                 {
-                    @foreach (List<Tramite> tramites in listaDeListas)
+                    @foreach (List<Tramite> tramites in _listaDeListas)
                     {   
                         <div class=margin >Expediente @tramites[0].ExpedienteId
                         <table class="table">
@@ -130,8 +132,9 @@ else if (_usuarioExiste)
                             <tr>
                                 <th>Contenido</th>
                                 <th>Etiqueta</th>
-                                <th>Fecha de creacion</th>
-                                <th>fecha ultima modificacion</th>
+                                <th>Fecha de creación</th>
+                                <th>Fecha de última modificación</th>
+                                <th>Usuario de última modificación</th>
                             </tr>
 
                         </thead>
@@ -144,6 +147,7 @@ else if (_usuarioExiste)
                                 <td>@tramite.Contenido</td>
                                 <td>@tramite.Etiqueta</td>
                                 <td>@tramite.FechaCreacion</td>
+                                <td>@tramite.FechaUltModificacion</td>
                                 <td>@tramite.UsuarioUltModificacion</td>
                                 @if (ServicioAutorizacion.PoseeElPermiso(_user.Id, Permiso.TramiteBaja))
                                 {
@@ -165,7 +169,7 @@ else if (_usuarioExiste)
                                 {
                                     <td>  
                                         <div class="alert alert-danger margin" role="alert">
-                                            <strong>No posee permiso para modificar tramites</strong> 
+                                            <strong>No posee permiso para modificar trámites</strong> 
                                         </div> 
                                     </td>
                                 }
@@ -178,7 +182,7 @@ else if (_usuarioExiste)
                 }
                 else
                 {            
-                    <p class="margin"> No hay tramites para mostrar. Busque un expediente y presione mostrar trámites </p>
+                    <p class="margin"> No hay trámites para mostrar. Busque un expediente y presione mostrar trámites </p>
                 }
             
             }
@@ -196,14 +200,14 @@ else
 @code {
     #nullable disable
         Usuario _user;
-        List<Expediente> expedientes;
+        List<Expediente> _expedientes;
     #nullable enable
     bool _usuarioExiste = true;
-    List<List<Tramite>> listaDeListas = new List<List<Tramite>>();
+    List<List<Tramite>> _listaDeListas = new List<List<Tramite>>();
     [Parameter]
     public int? Id { get; set; }
     bool _verTramites = false;
-    bool ver_expedientes = false;
+    bool _verExpedientes = false;
     void Loggear()
     {
         Navigation.NavigateTo("/login");
@@ -231,13 +235,13 @@ else
     }
     void AlternarTramites(List<Tramite> tramites)
     {
-        if (!listaDeListas.Contains(tramites))
+        if (!_listaDeListas.Contains(tramites))
         {
-            listaDeListas.Add(tramites);
+            _listaDeListas.Add(tramites);
         }
         else
         {
-            listaDeListas.Remove(tramites);
+            _listaDeListas.Remove(tramites);
         }
     }
 
@@ -263,7 +267,7 @@ else
     }
     void verExpedientes()
     {
-        ver_expedientes = !ver_expedientes;
+        _verExpedientes = !_verExpedientes;
     }
     void AgregarExpediente()
     {
@@ -278,7 +282,7 @@ else
             if (Id != null)
             {
                 _user = casoDeUsoObtenerUsuario.Ejecutar(Id.Value);
-                expedientes = casoDeUsoExpedienteConsultaTodos.Ejecutar();
+                _expedientes = casoDeUsoExpedienteConsultaTodos.Ejecutar();
             }
         }
         catch {_usuarioExiste = false;}

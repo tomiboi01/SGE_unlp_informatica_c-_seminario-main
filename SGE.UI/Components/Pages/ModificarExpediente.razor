@@ -12,16 +12,16 @@
   <h2> Modificando expediente número @IdExp</h2>
   <div>
     <label> Caratula:</label>
-    <input placeholder=@aux.Caratula @bind-value="exp.Caratula">
+    <input placeholder=@_aux.Caratula @bind-value="_exp.Caratula">
   </div>
   <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
 
 
 }
-@if (mensajeError != "")
+@if (_mensajeError != "")
 {
   <div class="alert alert-danger margin alinear" role="alert">
-    <strong>Error!</strong> @mensajeError.
+    <strong>Error!</strong> @_mensajeError.
     <button type="button" class="close" @onclick="CerrarError">x</button>
   </div>
 }
@@ -33,27 +33,27 @@
   public int Id { get; set; }
 
 #nullable disable
-  Expediente exp;
-  Expediente aux;
+  Expediente _exp;
+  Expediente _aux;
 #nullable enable
-  string mensajeError = "";
-  void CerrarError() => mensajeError = "";
+  string _mensajeError = "";
+  void CerrarError() => _mensajeError = "";
   void Modificar()
   {
     try
     {
-      casoDeUsoExpedienteModificar.Ejecutar(Id, exp);
+      casoDeUsoExpedienteModificar.Ejecutar(Id, _exp);
       Navigation.NavigateTo($"/{Id}");
     }
     catch (Exception e)
     {
-      mensajeError = e.Message;
+      _mensajeError = e.Message;
     }
   }
   protected override void OnParametersSet()
   {
-    exp = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdExp);
-    aux = new() { Caratula = exp.Caratula };
+    _exp = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdExp);
+    _aux = new() { Caratula = _exp.Caratula };
 
   }
   bool PoseePermiso()
@@ -62,14 +62,14 @@
     {
       if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteModificacion))
       {
-        mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+        _mensajeError = "No tiene los permisos necesarios para realizar esta operación";
         return false;
       }
       return true;
     }
     catch
     {
-      mensajeError = "Ocurrió un error validando su usuario";
+      _mensajeError = "Ocurrió un error validando su usuario";
       return false;
     }
 

@@ -12,9 +12,9 @@
     <h2> Modificando tramite número @IdTramite</h2>
     <div>
         <label> Contenido:</label>
-        <input placeholder=@aux.Contenido @bind-value="tra.Contenido">
+        <input placeholder=@_aux.Contenido @bind-value="_tra.Contenido">
         <label> Etiqueta </label>
-        <select @bind="@tra.Etiqueta">
+        <select @bind="@_tra.Etiqueta">
             <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
             <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
             <option value="@EtiquetaTramite.Despacho"> Despachado</option>
@@ -27,10 +27,10 @@
 
 }
 
-@if (mensajeError != "")
+@if (_mensajeError != "")
     {
         <div class="alert alert-danger margin alinear" role= alert">
-            <strong>Error!</strong> @mensajeError
+            <strong>Error!</strong> @_mensajeError
             <button type="button" class="close" @onclick="CerrarError">x</button>
         </div>
     }
@@ -42,27 +42,27 @@
     public int Id { get; set; }
 
 #nullable disable
-    Tramite tra;
-    Tramite aux;
+    Tramite _tra;
+    Tramite _aux;
 #nullable enable
-    public string mensajeError = "";
-     void CerrarError() => mensajeError = "";
+    string _mensajeError = "";
+     void CerrarError() => _mensajeError = "";
      void Modificar()
     {
         try
         {
-            casoDeUsoTramiteModificacion.Ejecutar(Id, tra);
+            casoDeUsoTramiteModificacion.Ejecutar(Id, _tra);
             Navigation.NavigateTo($"/{Id}");
         }
         catch (Exception e)
         {
-            mensajeError = e.Message;
+            _mensajeError = e.Message;
         }
     }
     protected override void OnParametersSet()
     {
-        tra = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdTramite);
-        aux = new() { Contenido = tra.Contenido };
+        _tra = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdTramite);
+        _aux = new() { Contenido = _tra.Contenido };
 
     }
      bool PoseePermiso()
@@ -71,14 +71,14 @@
         {
             if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteModificacion))
             {
-                mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+                _mensajeError = "No tiene los permisos necesarios para realizar esta operación";
                 return false;
             }
             return true;
         }
         catch
         {
-            mensajeError = "Ocurrió un error validando su usuario";
+            _mensajeError = "Ocurrió un error validando su usuario";
             return false;
         }
     }
