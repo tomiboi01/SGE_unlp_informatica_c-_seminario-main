@@ -9,70 +9,63 @@
 <PageTitle>Registrarse</PageTitle>
 <h3>Registrarse</h3>
 
-<EditForm Model="@user">
-    <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <InputText id="nombre" @bind-Value="user.Nombre" class="form-control margin" />
-        <label for="apellido">Apellido:</label>
-        <InputText id="apellido" @bind-Value="user.Apellido" class="form-control margin" />
-        <label for="correoelectronico">Correo electrónico:</label>
-        <InputText id="correoelectronico" @bind-Value="user.CorreoElectronico" class="form-control margin" />
-        <label for="contraseña">Contraseña:</label>
-        <InputText type="password" id="contraseña" @bind-Value="user.Contraseña" class="form-control margin" />
-    </div>
-    <button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
-</EditForm>
+<div class="form-group">
+    <label>Nombre:</label>
+    <input type="text" @bind="user.Nombre" class="form-control margin" />
+    <label>Apellido:</label>
+    <input type="text" @bind="user.Apellido" class="form-control margin" />
+    <label>Correo electrónico:</label>
+    <input type="text" @bind="user.CorreoElectronico" class="form-control margin" />
+    <label>Contraseña:</label>
+    <input type="password" id="contraseña" @bind="user.Contraseña" class="form-control margin" />
+</div>
+<button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
 
-@if (YaRegistrado)
+@if (mensajeError != "")
 {
-    <div class="alert alert-danger" role="alert">
-        <strong>Ya hay un usuario con ese correo y contraseña</strong>
-        <button type="button" class="close alineadoDer" @onclick="CerrarReg">x</button>
-    </div>
-}
-else
-if (NoValido)
-{
-    <div class="alert alert-danger" role="alert">
-        <strong>Usuario no valido!</strong>
-        <button type="button" class="close alineadoDer" @onclick="CerrarVal">x</button>
+    <div class="alert alert-danger margin alinear" role="alert">
+
+        <strong>Error!</strong> @mensajeError.
+        <button type="button" class="close" @onclick="CerrarError">x</button>
     </div>
 }
 
 
 @code
 {
-    bool YaRegistrado = false;
-    bool NoValido = false;
+
     private Usuario user = new();
+    private string mensajeError = "";
+    private void CerrarError() => mensajeError = "";
 
-    private void CerrarReg() => YaRegistrado = false;
-
-    private void CerrarVal() => NoValido = false;
 
     private void Agregar()
     {
 
         try
         {
-            manejarLogin.Loggear(user.CorreoElectronico, user.Contraseña);
-            YaRegistrado = true;
+            if (!manejarLogin.YaExisteConCorreo(user.CorreoElectronico))
+            {
+                casoDeUsoUsuarioAlta.Ejecutar(user);
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                mensajeError = "Ya hay un usuario con ese correo";
+            }
         }
-        catch
+        catch (Exception e)
         {
-            try
-            {
-                casoDeUsoUsuarioAlta.Ejecutar(1, user);
-                Navigation.NavigateTo($"/{user.Id}");
-            }
-            catch
-            {
-                NoValido = true;
-            }
+            mensajeError = e.Message;
         }
-        user = new();
+        finally
+        {
+            user = new();
+        }
 
     }
+
+
 }
 
 <style>

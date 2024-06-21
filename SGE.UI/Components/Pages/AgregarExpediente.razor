@@ -3,10 +3,10 @@
 @inject IServicioAutorizacion ServicioAutorizacion
 @inject CasoDeUsoExpedienteAlta CasoDeUsoExpedienteAlta
 @inject NavigationManager Navigation
-
-@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteAlta))
+<PageTitle>Agregar expediente</PageTitle>
+@if (PoseePermiso())
 {
-    <div class="margin">
+    <div class="form-group margin">
         <label>Carátula</label>
         <input type="text" @bind="expediente.Caratula" />
         <button class="btn btn-primary" @onclick="Guardar">Guardar</button>
@@ -53,6 +53,24 @@ else
     private void Cerrar()
     {
         mensajeError = "";
+
+    }
+    private bool PoseePermiso()
+    {
+        try
+        {
+            if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteAlta))
+            {
+                mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+                return false;
+            }
+            return true;
+        }
+        catch
+        {
+            mensajeError = "Ocurrió un error validando su usuario";
+            return false;
+        }
 
     }
 }

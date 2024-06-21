@@ -25,7 +25,13 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioSqlite>()
                 .AddTransient<CasoDeUsoUsuarioObtenerTodos>()
                 .AddTransient<IEspecificacionCambioDeEstado, EspecificacionCambioDeEstado>()
                 .AddTransient<IServicioAutorizacion, ServicioAutorizacion>()
-                .AddTransient<ManejarLogin>();
+                .AddTransient<ManejarLogin>()
+                .AddTransient<ExpedienteValidador>()
+                .AddTransient<TramiteValidador>()
+                .AddTransient<UsuarioValidador>()
+                .AddTransient<ServicioActualizacionEstado>()
+                .AddTransient<Hashing>();
+
 ;
 
 

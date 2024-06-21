@@ -5,7 +5,8 @@
 @inject NavigationManager Navigation
 @inject IServicioAutorizacion ServicioAutorizacion
 @rendermode InteractiveServer
-@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteModificacion))
+<PageTitle>Modificar expediente</PageTitle>
+@if (PoseePermiso())
 {
 
   <h2> Modificando expediente número @IdExp</h2>
@@ -15,19 +16,13 @@
   </div>
   <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
 
-  @if (mensajeError != "")
-  {
-    <div class="alert alert-danger margin" role="alert">
-      <strong>Error!</strong> @mensajeError.
-      <button type="button" class="close" @onclick="CerrarError">x</button>
-    </div>
-  }
+
 }
-else
+@if (mensajeError != "")
 {
-  <div class="alert alert-danger " role="alert">
-    <strong class>No tiene los pérmisos necesarios para realizar esta operación</strong>
-    <button type="button" class="close" href="/">x</button>
+  <div class="alert alert-danger margin alinear" role="alert">
+    <strong>Error!</strong> @mensajeError.
+    <button type="button" class="close" @onclick="CerrarError">x</button>
   </div>
 }
 @code
@@ -61,7 +56,24 @@ else
     aux = new() { Caratula = exp.Caratula };
 
   }
+  private bool PoseePermiso()
+  {
+    try
+    {
+      if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteModificacion))
+      {
+        mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+        return false;
+      }
+      return true;
+    }
+    catch
+    {
+      mensajeError = "Ocurrió un error validando su usuario";
+      return false;
+    }
 
+  }
 
 }
 <style>

@@ -1,18 +1,20 @@
-@page "/usuario/eliminar/{idUsuario:int?}"
+@page "/usuario/eliminar/{Id:int}/{idUsuario:int}"
 @inject NavigationManager Navigation
 @using SGE.Aplicacion.CasosDeUso
 @inject CasoDeUsoUsuarioBaja casoDeUsoUsuarioBaja
 @rendermode InteractiveServer
 
-
+<PageTitle>Eliminando usuario</PageTitle>
 
 @code {
     [Parameter]
-    public int? idUsuario { get; set; }
+    public int idUsuario { get; set; }
+    [Parameter]
+    public int Id { get; set; }
     protected override void OnAfterRender(bool firstRender)
     {
 
-        if (idUsuario == null)
+        if (Id != 1)
         {
             Navigation.NavigateTo("/");
         }
@@ -20,15 +22,11 @@
         {
             try
             {
-                casoDeUsoUsuarioBaja.Ejecutar(idUsuario.Value);
-                Navigation.NavigateTo($"/usuarios/1");
-
+                casoDeUsoUsuarioBaja.Ejecutar(idUsuario);
             }
-            catch
+            finally
             {
-
                 Navigation.NavigateTo($"/usuarios/1");
-
             }
         }
 

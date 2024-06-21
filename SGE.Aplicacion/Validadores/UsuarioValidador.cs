@@ -2,7 +2,7 @@ namespace SGE.Aplicacion;
 
 public class UsuarioValidador
 {
-    public static bool Validar(Usuario usuario, out string mensajeError)
+    public bool Validar(Usuario usuario, out string mensajeError)
     {
         mensajeError = "";
         if (usuario == null)

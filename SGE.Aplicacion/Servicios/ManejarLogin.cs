@@ -1,16 +1,14 @@
 namespace SGE.Aplicacion;
-public class ManejarLogin(IUsuarioRepositorio usuRepo)
+public class ManejarLogin(IUsuarioRepositorio usuRepo, Hashing hashing)
 {
     public Usuario Loggear(string correo, string contraseña)
     {
-        contraseña = Hashing.Hashear(contraseña);
+        contraseña = hashing.Hashear(contraseña);
         return usuRepo.ObtenerUsuario(correo, contraseña);
     }
-    public Usuario Loggear(string Id)
+    public bool YaExisteConCorreo(string correo)
     {
-        int id = int.Parse(Id);
-
-        return usuRepo.ObtenerUsuario(id);
+        return usuRepo.existeUsuarioConCorreo(correo);
     }
 
 

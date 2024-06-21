@@ -2,7 +2,7 @@ namespace SGE.Aplicacion;
 
 public class ExpedienteValidador
 {
-    public static bool Validar(Expediente? expediente, int usuario, out string mensajeError)
+    public bool Validar(Expediente? expediente, int usuario, out string mensajeError)
     {
         mensajeError = "";
         if (expediente == null)

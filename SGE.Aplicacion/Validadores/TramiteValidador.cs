@@ -1,7 +1,7 @@
 namespace SGE.Aplicacion;
 public class TramiteValidador
 {
-    public static bool Validar(Tramite? tramite, int usuario, out string mensajeError)
+    public bool Validar(Tramite? tramite, int usuario, out string mensajeError)
     {
         mensajeError = "";
         if (tramite == null)

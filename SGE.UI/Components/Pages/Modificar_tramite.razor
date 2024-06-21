@@ -6,7 +6,8 @@
 @inject NavigationManager Navigation
 @inject IServicioAutorizacion ServicioAutorizacion
 @rendermode InteractiveServer
-@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteModificacion))
+<PageTitle>Modificar trámite</PageTitle>
+@if (PoseePermiso())
 {
     <h2> Modificando tramite número @idTramite</h2>
     <div>
@@ -24,22 +25,15 @@
     </div>
     <button class="btn btn-primary margin" @onclick="Modificar">Modificar</button>
 
-    @if (mensajeError != "")
+}
+
+@if (mensajeError != "")
     {
-        <div class="alert alert-danger margin" role="alert">
-            <strong>Error!</strong> @mensajeError.
+        <div class="alert alert-danger margin alinear" role= alert">
+            <strong>Error!</strong> @mensajeError
             <button type="button" class="close" @onclick="CerrarError">x</button>
         </div>
     }
-
-}
-else
-{
-    <div class="alert alert-danger " role="alert">
-        <strong class>No tiene los pérmisos necesarios para realizar esta operación</strong>
-        <button type="button" class="close" href="/">x</button>
-    </div>
-}
 @code
 {
     [Parameter]
@@ -51,7 +45,7 @@ else
     Tramite tra;
     Tramite aux;
 #nullable enable
-    string mensajeError = "";
+    public string mensajeError = "";
     private void CerrarError() => mensajeError = "";
     private void Modificar()
     {
@@ -71,11 +65,25 @@ else
         aux = new() { Contenido = tra.Contenido };
 
     }
-
+    private bool PoseePermiso()
+    {
+        try
+        {
+            if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteModificacion))
+            {
+                mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+                return false;
+            }
+            return true;
+        }
+        catch
+        {
+            mensajeError = "Ocurrió un error validando su usuario";
+            return false;
+        }
+    }
 
 }
-
-
 <style>
     .margin {
         margin-bottom: 10px;

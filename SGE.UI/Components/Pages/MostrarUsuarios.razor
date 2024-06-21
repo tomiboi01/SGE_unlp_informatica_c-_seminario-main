@@ -4,7 +4,7 @@
 @inject NavigationManager Navigation
 @inject IServicioAutorizacion ServicioAutorizacion
 @rendermode InteractiveServer
-
+<PageTitle>Mostrar usuarios</PageTitle>
 @if (Id != 1)
 {
     <div class="alert alert-danger" role="alert">
@@ -13,22 +13,27 @@
 }
 else
 {
-    @foreach (Usuario user in usuarios)
-    {
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">@user.Nombre</h5>
-                <h6 class="card-text ">@user.Apellido</h6>
-                <p class="card-text">@user.CorreoElectronico</p>
-                <div class="nav-item px-3">
-                    <button class="btn btn-primary" type="submit" @onclick="() =>Modificar(user.Id)"> Modificar</button>
-                    <button class="btn btn-primary" type="submit" @onclick="() =>Eliminar(user.Id)"> Eliminar</button>
+    <div class="container mt-5 ">
+        <h2 class="text-center mb-4">Lista de Usuarios</h2>
+        <div class="row">
+
+            @foreach (Usuario user in usuarios)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@user.Nombre</h5>
+                            <h6 class="card-text ">@user.Apellido</h6>
+                            <p class="card-text">@user.CorreoElectronico</p>
+                            <button class="btn btn-primary margin" @onclick="() => Modificar(user.Id)"> Modificar</button>
+                            <button class="btn btn-danger margin" @onclick="() =>Eliminar(user.Id)"> Eliminar</button>
+                        </div>
+                    </div>
                 </div>
-
-
-            </div>
+            }
         </div>
-    }
+
+    </div>
 
 }
 
@@ -39,7 +44,7 @@ else
 
 #nullable disable
     public List<Usuario> usuarios;
-
+#nullable enable
     protected override void OnInitialized()
     {
         if (Id == 1)
@@ -55,7 +60,7 @@ else
     }
     private void Eliminar(int idUsuario)
     {
-        Navigation.NavigateTo($"/usuario/eliminar/{idUsuario}");
+        Navigation.NavigateTo($"/usuario/eliminar/{Id}/{idUsuario}");
     }
 
 

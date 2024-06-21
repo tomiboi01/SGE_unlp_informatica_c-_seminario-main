@@ -55,7 +55,6 @@ C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
-C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\Components\Pages\Register.razor.rz.scp.css
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\bundle\SGE.UI.styles.css
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\scopedcss\projectbundle\SGE.UI.bundle.scp.css
 C:\Users\fedec\Downloads\SGE_unlp_informatica_c-_seminario-main\SGE.UI\obj\Debug\net8.0\SGE.UI.csproj.Up2Date

@@ -1,14 +1,13 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
+public class CasoDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado, TramiteValidador tramiteValidador, ServicioActualizacionEstado servicioActualizacionEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
 {
-    private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
     public void Ejecutar(int usuario, Tramite tramite)
     {
-        if (!ServicioDeAutorizacion.PoseeElPermiso(usuario, Permiso.TramiteModificacion))
+        if (!servicioAutorizacion.PoseeElPermiso(usuario, Permiso.TramiteModificacion))
             throw new AutorizacionExcepcion("No posee el permiso");
 
-        if (!TramiteValidador.Validar(tramite, usuario, out string mensajeError))
+        if (!tramiteValidador.Validar(tramite, usuario, out string mensajeError))
             throw new ValidacionException(mensajeError);
 
         tramite.FechaUltModificacion = DateTime.Now;
@@ -18,7 +17,7 @@ public class CasoDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio
         //Con la primera condición evaluamos si el trámite que modificamos es el último y si no lo es, no se actualiza el estado del expediente.
         Tramite? auxiliar = RepositorioTram.BuscarUltimo(tramite.ExpedienteId);
         if (auxiliar?.Id == tramite.Id)
-            ServicioActualizacionEstado.ActualizarEstado(RepositorioTram, expedienteRepositorio, especificacionCambioDeEstado, tramite.ExpedienteId, usuario);
+            servicioActualizacionEstado.ActualizarEstado(RepositorioTram, expedienteRepositorio, especificacionCambioDeEstado, tramite.ExpedienteId, usuario);
 
     }
 

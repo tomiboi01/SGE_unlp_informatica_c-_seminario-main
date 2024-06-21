@@ -4,6 +4,7 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 @inject IServicioAutorizacion ServicioAutorizacion
+<PageTitle>Eliminando trámite</PageTitle>
 @code
 {
 
@@ -18,21 +19,16 @@
     protected override void OnAfterRender(bool firstRender)
     {
 
-        if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteBaja))
+        try
         {
-            Navigation.NavigateTo("/");
-        }
-        else
-        {
-            try
+            if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteBaja))
             {
                 caso.Ejecutar(Id, idTramite);
-
             }
-            finally
-            {
-                Navigation.NavigateTo($"/{Id}");
-            }
+        }
+        finally
+        {
+            Navigation.NavigateTo($"/{Id}");
         }
 
 

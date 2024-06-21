@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteBaja(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
+public class CasoDeUsoTramiteBaja(ITramiteRepositorio tramiteRepositorio, IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion servicioAutorizacion, IEspecificacionCambioDeEstado especificacionCambioDeEstado, ServicioActualizacionEstado servicioActualizacionEstado) : AbstractCasoDeUsoTramite(tramiteRepositorio)
 {
     private IServicioAutorizacion ServicioDeAutorizacion { get; } = servicioAutorizacion;
 
@@ -10,7 +10,7 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio tramiteRepositorio, IExped
             throw new AutorizacionExcepcion("No posee el permiso");
 
         RepositorioTram.Baja(idTramite, out int idExpediente);
-        ServicioActualizacionEstado.ActualizarEstado(RepositorioTram, expedienteRepositorio, especificacionCambioDeEstado, idExpediente, usuario);
+        servicioActualizacionEstado.ActualizarEstado(RepositorioTram, expedienteRepositorio, especificacionCambioDeEstado, idExpediente, usuario);
     }
 }
 

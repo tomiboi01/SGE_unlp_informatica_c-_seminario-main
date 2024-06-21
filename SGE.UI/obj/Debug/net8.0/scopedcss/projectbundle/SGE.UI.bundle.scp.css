@@ -16,10 +16,10 @@ main[b-k716zha75e] {
 .top-row[b-k716zha75e] {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
+    justify-content: left;
     height: 3.5rem;
     display: flex;
-    align-items: center;
+    align-items: left;
 }
 
     .top-row[b-k716zha75e]  a, .top-row[b-k716zha75e]  .btn-link {
@@ -201,14 +201,3 @@ main[b-k716zha75e] {
         overflow-y: auto;
     }
 }
-/* _content/SGE.UI/Components/Pages/Register.razor.rz.scp.css */
-.margin[b-iu433xhpj6] {
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 150px;
-    margin-left: 80px;
-    }
-.alineadoDer[b-iu433xhpj6] {
-    text-align: right;
-    }
-    

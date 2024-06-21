@@ -40,12 +40,23 @@ public class UsuarioSqlite : IUsuarioRepositorio
     }
     public Usuario ObtenerUsuario(string correo, string contraseña)
     {
-        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == contraseña).SingleOrDefault();
+        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo && x.Contraseña == contraseña).FirstOrDefault();
         if (user != null)
         {
             return user;
         }
         throw new RepositorioException("Usuario no encontrado");
+    }
+
+    public bool existeUsuarioConCorreo(string correo)
+    {
+        var user = _context.Usuarios.Where(x => x.CorreoElectronico == correo).FirstOrDefault();
+        if (user != null)
+        {
+            return true;
+        }
+        return false;
+
     }
     public Usuario ObtenerUsuario(int Id)
     {

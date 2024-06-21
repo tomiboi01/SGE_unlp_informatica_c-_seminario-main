@@ -5,24 +5,25 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 @inject IServicioAutorizacion ServicioAutorizacion
-@if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteAlta))
+<PageTitle>Agregando trámite</PageTitle>
+@if (PoseePermiso())
 {
     <h3>Agregar Tramite</h3>
 
 
-
-    <label> Contenido </label>
-    <input @bind=@tramite.Contenido>
-    <label> Etiqueta </label>
-    <select @bind="@tramite.Etiqueta">
-        <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
-        <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
-        <option value="@EtiquetaTramite.Despacho"> Despachado</option>
-        <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
-        <option value="@EtiquetaTramite.Notificacion">Notificación</option>
-        <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
-    </select>
-
+    <div class="form-group margin">
+        <label> Contenido </label>
+        <input @bind=@tramite.Contenido>
+        <label> Etiqueta </label>
+        <select @bind="@tramite.Etiqueta">
+            <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
+            <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
+            <option value="@EtiquetaTramite.Despacho"> Despachado</option>
+            <option value="@EtiquetaTramite.Resolucion">Resolucion</option>
+            <option value="@EtiquetaTramite.Notificacion">Notificación</option>
+            <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
+        </select>
+    </div>
     <button class="btn btn-primary" @onclick="Agregar">Agregar</button>
 
     @if (mensajeError != "")
@@ -66,6 +67,24 @@ else
         {
             mensajeError = e.Message;
         }
+    }
+    private bool PoseePermiso()
+    {
+        try
+        {
+            if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteAlta))
+            {
+                mensajeError = "No tiene los permisos necesarios para realizar esta operación";
+                return false;
+            }
+            return true;
+        }
+        catch
+        {
+            mensajeError = "Ocurrió un error validando su usuario";
+            return false;
+        }
+
     }
 
 }

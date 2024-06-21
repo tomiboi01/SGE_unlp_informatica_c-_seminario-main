@@ -3,7 +3,7 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja caso
 @inject IServicioAutorizacion ServicioAutorizacion
-
+<PageTitle>Eliminando expediente</PageTitle>
 @code
 {
 
@@ -17,23 +17,17 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-
-        if (!ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteBaja))
+        try
         {
-            Navigation.NavigateTo("/");
-        }
-        else
-        {
-            try
+            if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.ExpedienteBaja))
             {
                 caso.Ejecutar(Id, IdExp);
             }
-            finally
-            {
-                Navigation.NavigateTo($"/{Id}");
-            }
         }
-
+        finally
+        {
+            Navigation.NavigateTo($"/{Id}");
+        }
 
 
     }

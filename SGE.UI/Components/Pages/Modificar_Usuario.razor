@@ -1,82 +1,108 @@
-@page "/usuarios/modificar/{Id:int}/{idUsuario:int}"
+@page "/usuarios/modificar/{IdSesion:int}/{IdUsuario:int}"
 @inject NavigationManager Navigation
 @using SGE.Aplicacion
 @inject CasoDeUsoUsuarioModificar casoDeUsoUsuarioModificar
 @inject CasoDeUsoUsuarioObtenerPorId casoDeUsoUsuarioObtenerPorId
-@inject NavigationManager Navigation
 @rendermode InteractiveServer
+<PageTitle>Modificar usuario</PageTitle>
 
-<h2>
-    <p>Modificando usuario con id: @idUsuario </p>
-</h2>
-
-<label>Nombre:</label>
-<input type="text" placeholder="aux.Nombre" @bind="user.Nombre" />
-<label>Apellido:</label>
-<input type="text" placeholder="aux.Apellido" @bind="user.Apellido" />
-<label>Correo electrónico:</label>
-<input type="email" placeholder="aux.CorreoElectronico" @bind="user.CorreoElectronico" />
-<label>Contraseña:</label>
-<input type="password" @bind="user.Contraseña" />
-@if (Id == 1)
+@if (IdSesion == 1 || IdSesion == IdUsuario)
 {
-    @if (idUsuario != 1)
-    {
-        <label> @per[0].ToString() </label>
-        <input type="checkbox" @bind="user.Permisos[0]" />
-        <label> @per[1].ToString() </label>
-        <input type="checkbox" @bind="user.Permisos[1]" />
-        <label> @per[2].ToString() </label>
-        <input type="checkbox" @bind="user.Permisos[2]" />
-        <label> @per[3].ToString() </label>
-        <input type="checkbox" @bind="user.Permisos[3]" />
-        <label> @per[4].ToString() </label>
-        <input type="checkbox" @bind="user.Permisos[4]" />
-        <label> @per[5].ToString() </label>
-        <input type=" checkbox" @bind="user.Permisos[5]" />
-    }
-    else
-    {
-        <p> Usted tiene todos los permisos </p>
-    }
+    <div class="container mt-5">
+        <h2> Modificando usuario con id: @IdUsuario</h2>
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" class="form-control" placeholder="@aux.Nombre" @bind="user.Nombre" />
+        </div>
+        <div class="form-group">
+            <label>Apellido:</label>
+            <input type="text" class="form-control" placeholder="@aux.Apellido" @bind="user.Apellido" />
+        </div>
+        <div class="form-group">
+            <label>Correo electrónico:</label>
+            <input type="email" class="form-control" placeholder="@aux.CorreoElectronico" @bind="user.CorreoElectronico" />
+        </div>
+        <p class="verticalmargin"> Por favor, reescriba la contraseña </p>
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <input type="password" class="form-control" @bind="contraseña" />
+        </div>
+
+        @if (IdSesion == 1)
+        {
+            @if (IdUsuario != 1)
+            {
+                <h4 class="margin"> Permisos </h4>
+                <div class="form-group">
+                    <label> @per[0].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[0]" />
+                </div>
+                <div class="form-group">
+                    <label> @per[1].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[1]" />
+                </div>
+                <div class="form-group">
+                    <label> @per[2].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[2]" />
+                </div>
+                <div class="form-group">
+                    <label> @per[3].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[3]" />
+                </div>
+                <div class="form-group">
+                    <label> @per[4].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[4]" />
+                </div>
+                <div class="form-group">
+                    <label> @per[5].ToString() </label>
+                    <input type="checkbox" @bind="user.Permisos[5]" />
+                </div>
+            }
+            else
+            {
+                <p>Usted tiene todos los permisos.</p>
+            }
+        }
+
+        <button type="submit" @onclick="Modificar" class="btn btn-primary mt-3">Modificar</button>
+
+    </div>
 }
-
-<button type=" submit" @onclick="Modificar" class="btn btn-primary margin">Modificar</button>
-
 
 @if (mensajeError != "")
 {
-    <div class="alert alert-danger margin" role="alert">
-        <strong>Error!</strong> @mensajeError.
+    <div class="alert alert-danger alinear margin" role="alert">
+        <strong>Error!</strong> @mensajeError
         <button type="button" class="close" @onclick="CerrarError">x</button>
     </div>
 }
-@code
-{
+
+@code {
     [Parameter]
-    public int Id { get; set; }
+    public int IdSesion { get; set; }
     [Parameter]
-    public int idUsuario { get; set; }
+    public int IdUsuario { get; set; }
     Permiso[] per = Enum.GetValues(typeof(Permiso)).Cast<Permiso>().ToArray();
 #nullable disable
-    Usuario user;
     Usuario aux;
+    Usuario user;
 #nullable enable
+    string contraseña = "";
     string mensajeError = "";
     private void CerrarError() => mensajeError = "";
     private void Modificar()
     {
         try
         {
+            user.Contraseña = contraseña;
             casoDeUsoUsuarioModificar.Ejecutar(user);
-            if (Id == 1)
+            if (IdSesion == 1)
             {
-                Navigation.NavigateTo($"/usuarios/{Id}");
+                Navigation.NavigateTo($"/usuarios/{IdSesion}");
             }
             else
             {
-                Navigation.NavigateTo($"/{Id}");
-
+                Navigation.NavigateTo($"/{IdSesion}");
             }
         }
         catch (Exception e)
@@ -86,18 +112,36 @@
     }
     protected override void OnParametersSet()
     {
-        user = casoDeUsoUsuarioObtenerPorId.Ejecutar(idUsuario);
-        aux = user;
-
+        try
+        {
+            user = casoDeUsoUsuarioObtenerPorId.Ejecutar(IdUsuario);
+            aux = user;
+        }
+        catch
+        {
+            mensajeError = "No se pudo obtener el usuario";
+        }
     }
 }
 
-
 <style>
-    .margin {
-        margin-bottom: 10px;
-        margin-top: 30px;
-        display: inline-block;
+    .mt-5 {
+        margin-top: 3rem;
+    }
 
+    .mt-3 {
+        margin-top: 1rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-check {
+        margin-bottom: 0.5rem;
     }
 </style>
