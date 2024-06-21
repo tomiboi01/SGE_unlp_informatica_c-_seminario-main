@@ -4,11 +4,11 @@
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioObtenerPorId casoDeUsoObtenerUsuario
 @rendermode InteractiveServer
-@if (usuarioExiste)
+@if (_usuarioExiste)
 {
-    <h3>Tramites por etiqueta</h3>
+    <h3>Tramites por _etiqueta</h3>
 
-    <select @bind="@etiqueta">
+    <select @bind="@_etiqueta">
         <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
         <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
         <option value="@EtiquetaTramite.Despacho"> Despacho</option>
@@ -17,15 +17,15 @@
         <option value="@EtiquetaTramite.PaseAlArchivo">Pase al archivo</option>
     </select>
     <button class="btn btn-primary" @onclick="BuscarTramites">Buscar</button>
-    @if (tramites != null)
+    @if (_tramites != null)
     {
-        @foreach (Tramite tramite in tramites)
+        @foreach (Tramite tramite in _tramites)
         {
             <table class="table">
                 <thead>
                     <tr>
                         <th>Contenido</th>
-                        <th>Etiqueta</th>
+                        <th>_etiqueta</th>
                         <th>Fecha de creación</th>
                         <th>Fecha ultima modificación</th>
                         <th>Usuario ultima modificación</th>
@@ -39,7 +39,7 @@
                         <td>@tramite.FechaCreacion</td>
                         <td>@tramite.FechaUltModificacion</td>
                         <td>@tramite.UsuarioUltModificacion</td>
-                        @if (ServicioAutorizacion.PoseeElPermiso(user.Id, Permiso.TramiteBaja))
+                        @if (ServicioAutorizacion.PoseeElPermiso(_user.Id, Permiso.TramiteBaja))
                         {
                             <td> <button class="btn btn-danger" @onclick="() => EliminarTramite(tramite.Id)">Eliminar tramite </button>
                             </td>
@@ -52,7 +52,7 @@
                                 </div>
                             </td>
                         }
-                        @if (ServicioAutorizacion.PoseeElPermiso(user.Id, Permiso.TramiteModificacion))
+                        @if (ServicioAutorizacion.PoseeElPermiso(_user.Id, Permiso.TramiteModificacion))
                         {
                             <td> <button class="btn btn-warning" @onclick="() => ModificarTramite(tramite.Id)">Modificar tramite
                                 </button>
@@ -80,23 +80,23 @@ else
 
 }
 @code {
-    EtiquetaTramite etiqueta;
-    List<Tramite>? tramites;
+    EtiquetaTramite _etiqueta;
+    List<Tramite>? _tramites;
     [Parameter]
     public int Id { get; set; }
-    Usuario user = null!;
-    bool usuarioExiste = true;
-    private void BuscarTramites()
+    Usuario _user = null!;
+    bool _usuarioExiste = true;
+    void BuscarTramites()
     {
-        tramites = CasoDeUsoTramiteConsultaPorEtiqueta.Ejecutar(etiqueta);
+        _tramites = CasoDeUsoTramiteConsultaPorEtiqueta.Ejecutar(_etiqueta);
     }
-    private void EliminarTramite(int idTramite)
+    void EliminarTramite(int IdTramite)
     {
-        Navigation.NavigateTo($"/tramite/eliminar/{Id}/{idTramite}");
+        Navigation.NavigateTo($"/tramite/eliminar/{Id}/{IdTramite}");
     }
-    private void ModificarTramite(int idTramite)
+    void ModificarTramite(int IdTramite)
     {
-        Navigation.NavigateTo($"/tramite/modificar/{Id}/{idTramite}");
+        Navigation.NavigateTo($"/tramite/modificar/{Id}/{IdTramite}");
     }
     protected override void OnInitialized()
     {
@@ -104,9 +104,9 @@ else
         try
         {
 
-            user = casoDeUsoObtenerUsuario.Ejecutar(Id);
+            _user = casoDeUsoObtenerUsuario.Ejecutar(Id);
 
         }
-        catch { usuarioExiste = false; }
+        catch { _usuarioExiste = false; }
     }
 }

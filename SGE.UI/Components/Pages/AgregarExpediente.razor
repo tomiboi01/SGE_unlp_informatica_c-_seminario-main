@@ -8,7 +8,7 @@
 {
     <div class="form-group margin">
         <label>Carátula</label>
-        <input type="text" @bind="expediente.Caratula" />
+        <input type="text" @bind="_expediente.Caratula" />
         <button class="btn btn-primary" @onclick="Guardar">Guardar</button>
     </div>
     @if (mensajeError != "")
@@ -30,15 +30,15 @@ else
     <button @onclick="Volver">Volver</button>
 }
 @code {
-    Expediente expediente = new Expediente();
+    Expediente _expediente = new Expediente();
     string mensajeError = "";
     [Parameter]
     public int Id { get; set; }
-    private void Guardar()
+    void Guardar()
     {
         try
         {
-            CasoDeUsoExpedienteAlta.Ejecutar(Id, expediente);
+            CasoDeUsoExpedienteAlta.Ejecutar(Id, _expediente);
             Navigation.NavigateTo($"/{Id}");
         }
         catch (Exception ex)
@@ -46,16 +46,16 @@ else
             mensajeError = ex.Message;
         }
     }
-    private void Volver()
+    void Volver()
     {
         Navigation.NavigateTo($"/{Id}");
     }
-    private void Cerrar()
+    void Cerrar()
     {
         mensajeError = "";
 
     }
-    private bool PoseePermiso()
+    bool PoseePermiso()
     {
         try
         {

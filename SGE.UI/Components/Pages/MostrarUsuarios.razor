@@ -43,7 +43,7 @@ else
     public int Id { get; set; }
 
 #nullable disable
-    public List<Usuario> usuarios;
+    List<Usuario> usuarios;
 #nullable enable
     protected override void OnInitialized()
     {
@@ -54,11 +54,11 @@ else
 
     }
 
-    private void Modificar(int idUsuario)
+    void Modificar(int idUsuario)
     {
         Navigation.NavigateTo($"/usuarios/modificar/{Id}/{idUsuario}");
     }
-    private void Eliminar(int idUsuario)
+    void Eliminar(int idUsuario)
     {
         Navigation.NavigateTo($"/usuario/eliminar/{Id}/{idUsuario}");
     }

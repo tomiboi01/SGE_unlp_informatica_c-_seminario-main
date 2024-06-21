@@ -1,0 +1,69 @@
+@page "/expediente/buscar/{Id:int}"
+@inject CasoDeUsoExpedienteConsultaPorId _caso
+
+<div class="form-group">
+    <label>Id:</label>
+    <input type="text" class="form-control" @bind="IdExp" />
+</div>
+<button type="submit" @onclick="Buscar" class="btn btn-primary mt-3">Modificar</button>
+
+
+@if (_expediente != null)
+{
+    <div class="form-group">
+        <label>Id:</label>
+        <input type="text" class="form-control" value="@_expediente.Id" disabled />
+    </div>
+    <div class="form-group">
+        <label>Caratula:</label>
+        <input type="text" class="form-control" value="@_expediente.Caratula" disabled />
+    </div>
+    <div class="form-group">
+        <label>Fecha de creación:</label>
+        <input type="text" class="form-control" value="@_expediente.FechaCreacion" disabled />
+    </div>
+    <div class="form-group">
+        <label>Fecha de última modificación:</label>
+        <input type="text" class="form-control" value="@_expediente.FechaUltModificacion" disabled />
+    </div>
+    <div class="form-group">
+        <label>Estado:</label>
+        <input type="text" class="form-control" value="@_expediente.Estado" disabled />
+    </div>
+}
+
+
+@if (_mensajeError != "")
+{
+    <div class="alert alert-danger margin alinear" role="alert">
+        <strong>Error!</strong> @_mensajeError.
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+#nullable disable
+    Expediente _expediente;
+#nullable enable
+    int IdExp;
+    string _mensajeError = "";
+    void Buscar()
+    {
+        try
+        {
+            _expediente = _caso.Ejecutar(IdExp);
+            _mensajeError = "";
+        }
+        catch
+        {
+            _expediente = null;
+            _mensajeError = "No se encontró el expediente.";
+        }
+
+    }
+
+
+}

@@ -1,4 +1,4 @@
-@page "/tramite/modificar/{Id:int}/{idTramite:int}"
+@page "/tramite/modificar/{Id:int}/{IdTramite:int}"
 @inject NavigationManager Navigation
 @using SGE.Aplicacion
 @inject CasoDeUsoTramiteModificacion casoDeUsoTramiteModificacion
@@ -9,7 +9,7 @@
 <PageTitle>Modificar trámite</PageTitle>
 @if (PoseePermiso())
 {
-    <h2> Modificando tramite número @idTramite</h2>
+    <h2> Modificando tramite número @IdTramite</h2>
     <div>
         <label> Contenido:</label>
         <input placeholder=@aux.Contenido @bind-value="tra.Contenido">
@@ -37,7 +37,7 @@
 @code
 {
     [Parameter]
-    public int idTramite { get; set; }
+    public int IdTramite { get; set; }
     [Parameter]
     public int Id { get; set; }
 
@@ -46,8 +46,8 @@
     Tramite aux;
 #nullable enable
     public string mensajeError = "";
-    private void CerrarError() => mensajeError = "";
-    private void Modificar()
+     void CerrarError() => mensajeError = "";
+     void Modificar()
     {
         try
         {
@@ -61,11 +61,11 @@
     }
     protected override void OnParametersSet()
     {
-        tra = casoDeUsoExpedienteConsultaPorId.Ejecutar(idTramite);
+        tra = casoDeUsoExpedienteConsultaPorId.Ejecutar(IdTramite);
         aux = new() { Contenido = tra.Contenido };
 
     }
-    private bool PoseePermiso()
+     bool PoseePermiso()
     {
         try
         {

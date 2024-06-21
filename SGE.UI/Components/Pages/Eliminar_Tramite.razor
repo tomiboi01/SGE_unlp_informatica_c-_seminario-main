@@ -1,4 +1,4 @@
-@page "/tramite/eliminar/{Id:int}/{idTramite:int}"
+@page "/tramite/eliminar/{Id:int}/{IdTramite:int}"
 
 @inject CasoDeUsoTramiteBaja caso
 @inject NavigationManager Navigation
@@ -7,31 +7,22 @@
 <PageTitle>Eliminando trámite</PageTitle>
 @code
 {
-
     [Parameter]
-    public int idTramite { get; set; }
+    public int IdTramite { get; set; }
     [Parameter]
     public int Id { get; set; }
-
-
-
-
     protected override void OnAfterRender(bool firstRender)
     {
-
         try
         {
             if (ServicioAutorizacion.PoseeElPermiso(Id, Permiso.TramiteBaja))
             {
-                caso.Ejecutar(Id, idTramite);
+                caso.Ejecutar(Id, IdTramite);
             }
         }
         finally
         {
             Navigation.NavigateTo($"/{Id}");
         }
-
-
-
     }
 }

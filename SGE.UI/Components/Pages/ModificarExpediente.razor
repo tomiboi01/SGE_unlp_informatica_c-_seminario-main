@@ -37,8 +37,8 @@
   Expediente aux;
 #nullable enable
   string mensajeError = "";
-  private void CerrarError() => mensajeError = "";
-  private void Modificar()
+  void CerrarError() => mensajeError = "";
+  void Modificar()
   {
     try
     {
@@ -56,7 +56,7 @@
     aux = new() { Caratula = exp.Caratula };
 
   }
-  private bool PoseePermiso()
+  bool PoseePermiso()
   {
     try
     {

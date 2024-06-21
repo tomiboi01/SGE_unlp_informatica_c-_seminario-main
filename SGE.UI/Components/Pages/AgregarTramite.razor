@@ -8,14 +8,14 @@
 <PageTitle>Agregando trámite</PageTitle>
 @if (PoseePermiso())
 {
-    <h3>Agregar Tramite</h3>
+    <h3>Agregar trámite</h3>
 
 
     <div class="form-group margin">
         <label> Contenido </label>
-        <input @bind=@tramite.Contenido>
+        <input @bind=@_tramite.Contenido>
         <label> Etiqueta </label>
-        <select @bind="@tramite.Etiqueta">
+        <select @bind="@_tramite.Etiqueta">
             <option value="@EtiquetaTramite.EscritoPresentado">Escrito presentado</option>
             <option value="@EtiquetaTramite.PaseAEstudio">Pase a estudio</option>
             <option value="@EtiquetaTramite.Despacho"> Despachado</option>
@@ -45,21 +45,21 @@ else
 
 @code
 {
-    private Tramite tramite = new();
+    Tramite _tramite = new();
     [Parameter]
     public int Id { get; set; }
     [Parameter]
     public int IdExp { get; set; }
 
-    private string mensajeError = "";
+    string mensajeError = "";
 
-    private void cerrarError() => mensajeError = "";
-    private void Agregar()
+    void cerrarError() => mensajeError = "";
+    void Agregar()
     {
         try
         {
-            tramite.ExpedienteId = IdExp;
-            casoDeUsoTramiteAlta.Ejecutar(Id, tramite);
+            _tramite.ExpedienteId = IdExp;
+            casoDeUsoTramiteAlta.Ejecutar(Id, _tramite);
             Navigation.NavigateTo($"/{Id}");
 
         }
@@ -68,7 +68,7 @@ else
             mensajeError = e.Message;
         }
     }
-    private bool PoseePermiso()
+    bool PoseePermiso()
     {
         try
         {

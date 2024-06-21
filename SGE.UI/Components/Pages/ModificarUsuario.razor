@@ -25,7 +25,7 @@
         <p class="verticalmargin"> Por favor, reescriba la contraseña </p>
         <div class="form-group">
             <label>Contraseña:</label>
-            <input type="password" class="form-control" @bind="contraseña" />
+            <input type="password" class="form-control" @bind="@contraseña" />
         </div>
 
         @if (IdSesion == 1)
@@ -66,6 +66,7 @@
 
         <button type="submit" @onclick="Modificar" class="btn btn-primary mt-3">Modificar</button>
 
+        <p class="verticalmargin"> Si no quiere modificar la contraseña dejela vacía</p>
     </div>
 }
 
@@ -89,13 +90,16 @@
 #nullable enable
     string contraseña = "";
     string mensajeError = "";
-    private void CerrarError() => mensajeError = "";
-    private void Modificar()
+    void CerrarError() => mensajeError = "";
+    void Modificar()
     {
         try
         {
-            user.Contraseña = contraseña;
-            casoDeUsoUsuarioModificar.Ejecutar(user);
+            if (contraseña != "")
+            {
+                user.Contraseña = contraseña;
+            }
+            casoDeUsoUsuarioModificar.Ejecutar(user, aux.Contraseña);
             if (IdSesion == 1)
             {
                 Navigation.NavigateTo($"/usuarios/{IdSesion}");
@@ -115,7 +119,14 @@
         try
         {
             user = casoDeUsoUsuarioObtenerPorId.Ejecutar(IdUsuario);
-            aux = user;
+            aux = new()
+                {
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellido,
+                    CorreoElectronico = user.CorreoElectronico,
+                    Contraseña = user.Contraseña,
+                    Permisos = user.Permisos
+                };
         }
         catch
         {
@@ -126,11 +137,11 @@
 
 <style>
     .mt-5 {
-        margin-top: 3rem;
+        margin-top: 10px;
     }
 
     .mt-3 {
-        margin-top: 1rem;
+        margin-top: 10px;
     }
 
     .text-center {
@@ -138,10 +149,6 @@
     }
 
     .form-group {
-        margin-bottom: 1rem;
-    }
-
-    .form-check {
-        margin-bottom: 0.5rem;
+        margin-bottom: 10px;
     }
 </style>

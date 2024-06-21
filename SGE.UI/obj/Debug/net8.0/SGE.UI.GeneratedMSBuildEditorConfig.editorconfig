@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ3JlZ2FyVHJhbWl0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/BuscarExpediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xCdXNjYXJFeHBlZGllbnRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Eliminar_expediente.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbGltaW5hcl9leHBlZGllbnRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,16 +62,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Modificar_expediente.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJfZXhwZWRpZW50ZS5yYXpvcg==
+[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/ModificarExpediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJFeHBlZGllbnRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Modificar_tramite.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJfdHJhbWl0ZS5yYXpvcg==
+[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/ModificarTramite.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJUcmFtaXRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/Modificar_Usuario.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJfVXN1YXJpby5yYXpvcg==
+[C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/ModificarUsuario.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJVc3VhcmlvLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/fedec/Downloads/SGE_unlp_informatica_c-_seminario-main/SGE.UI/Components/Pages/MostrarUsuarios.razor]

@@ -11,21 +11,21 @@
 
 <div class="form-group">
     <label>Nombre:</label>
-    <input type="text" @bind="user.Nombre" class="form-control margin" />
+    <input type="text" @bind="_user.Nombre" class="form-control margin" />
     <label>Apellido:</label>
-    <input type="text" @bind="user.Apellido" class="form-control margin" />
+    <input type="text" @bind="_user.Apellido" class="form-control margin" />
     <label>Correo electrónico:</label>
-    <input type="text" @bind="user.CorreoElectronico" class="form-control margin" />
+    <input type="text" @bind="_user.CorreoElectronico" class="form-control margin" />
     <label>Contraseña:</label>
-    <input type="password" id="contraseña" @bind="user.Contraseña" class="form-control margin" />
+    <input type="password" id="contraseña" @bind="_user.Contraseña" class="form-control margin" />
 </div>
 <button type="submit" @onclick="Agregar" class="btn btn-primary margin">Registrar</button>
 
-@if (mensajeError != "")
+@if (_mensajeError != "")
 {
     <div class="alert alert-danger margin alinear" role="alert">
 
-        <strong>Error!</strong> @mensajeError.
+        <strong>Error!</strong> @_mensajeError.
         <button type="button" class="close" @onclick="CerrarError">x</button>
     </div>
 }
@@ -34,9 +34,9 @@
 @code
 {
 
-    private Usuario user = new();
-    private string mensajeError = "";
-    private void CerrarError() => mensajeError = "";
+    Usuario _user = new();
+    string _mensajeError = "";
+    void CerrarError() => _mensajeError = "";
 
 
     private void Agregar()
@@ -44,23 +44,23 @@
 
         try
         {
-            if (!manejarLogin.YaExisteConCorreo(user.CorreoElectronico))
+            if (!manejarLogin.YaExisteConCorreo(_user.CorreoElectronico))
             {
-                casoDeUsoUsuarioAlta.Ejecutar(user);
+                casoDeUsoUsuarioAlta.Ejecutar(_user);
                 Navigation.NavigateTo("/login");
             }
             else
             {
-                mensajeError = "Ya hay un usuario con ese correo";
+                _mensajeError = "Ya hay un usuario con ese correo";
             }
         }
         catch (Exception e)
         {
-            mensajeError = e.Message;
+            _mensajeError = e.Message;
         }
         finally
         {
-            user = new();
+            _user = new();
         }
 
     }
